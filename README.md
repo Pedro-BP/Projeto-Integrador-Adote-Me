@@ -29,8 +29,6 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 - **Filtros de busca:** por tipo de animal (cachorro ou gato) e por porte.
 - **Cadastro de pets (CRUD):** área administrativa para cadastrar, editar e marcar pets como "Adotado" (removendo-os da listagem pública).
 - **Página de detalhes do pet:** história do animal e contato (WhatsApp ou e-mail) do responsável pela doação.
-- **Autenticação com JWT:** login validado via Json Web Token.
-- **Autenticação por roles:** dois perfis distintos de usuário.
 - **Tela de "pós-adoção":** espaço para quem adotou um pet postar fotos/relatos de como o animal está, com reações de outros usuários.
 
 ### Fora do escopo
@@ -41,13 +39,14 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 ## Arquitetura e tecnologias
 
-| Camada                 | Tecnologia                                                        |
-| ---------------------- | ----------------------------------------------------------------- |
-| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                       |
-| **Backend**            | PHP com o framework Slim4 (API)                                   |
-| **Banco de dados**     | MySQL, com Prisma como ORM                                        |
-| **Ambiente local**     | XAMPP                                                             |
-| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto) |
+| Camada                 | Tecnologia                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                          |
+| **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC          |
+| **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário) |
+| **Banco de dados**     | MySQL, com Prisma como ORM                                                           |
+| **Ambiente local**     | XAMPP                                                                                |
+| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                    |
 
 ## Como rodar o projeto
 
@@ -63,5 +62,4 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 Projeto em desenvolvimento — Projeto Integrador do curso.
 
 <!-- ## Licença
-
 > Defina aqui a licença do projeto (ex: MIT), se aplicável. -->
