@@ -37,14 +37,14 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 ## Arquitetura e tecnologias
 
-| Camada                 | Tecnologia                                                                           |
-| ---------------------- | ------------------------------------------------------------------------------------ |
-| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                          |
-| **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC          |
-| **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário) |
-| **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP)                                       |
-| **Ambiente local**     | XAMPP                                                                                |
-| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                    |
+| Camada                 | Tecnologia                                                                             |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                            |
+| **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC            |
+| **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário)   |
+| **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP) — IDs em UUID em vez de auto incremento |
+| **Ambiente local**     | XAMPP                                                                                  |
+| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                      |
 
 ## Estrutura do banco de dados
 
@@ -110,6 +110,3 @@ O script completo de criação do banco está em [`database.sql`](./database.sql
 ## Status
 
 Projeto em desenvolvimento — Projeto Integrador do curso.
-
-<!-- ## Licença
-> Defina aqui a licença do projeto (ex: MIT), se aplicável. -->
