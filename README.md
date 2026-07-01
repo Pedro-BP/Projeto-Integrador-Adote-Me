@@ -1,7 +1,6 @@
 # Projeto Integrador (PI) - Adote-Me
 
 Mural de anúncios simples e centralizado para conectar pessoas que encontraram animais abandonados (ou têm filhotes para doar) com pessoas interessadas em adotar um pet.
-
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?logo=react&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/CSS-TailwindCSS-38B2AC?logo=tailwindcss&logoColor=white)
@@ -11,11 +10,8 @@ Mural de anúncios simples e centralizado para conectar pessoas que encontraram 
 ## Sobre o projeto
 
 PI para o Módulo de Desenvolvimento de Sistemas do curso Técnico em Informática do Senac.
-
 O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já organizam feiras de adoção de pets e fazem um bom trabalho, mas essa iniciativa é pouco divulgada e os anúncios de animais para adoção acabam se perdendo em redes sociais. O projeto centraliza esses anúncios em um site único, organizado e fácil de navegar.
-
 **Objetivo principal:** criar um site que funcione como um mural de anúncios, substituindo posts perdidos em redes sociais por uma listagem organizada de animais disponíveis para adoção.
-
 **Público-alvo:**
 
 - Pessoas que querem adotar um animal.
@@ -44,9 +40,61 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 | **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                          |
 | **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC          |
 | **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário) |
-| **Banco de dados**     | MySQL, com Prisma como ORM                                                           |
+| **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP)                                       |
 | **Ambiente local**     | XAMPP                                                                                |
 | **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                    |
+
+## Estrutura do banco de dados
+
+O banco é composto por três entidades principais: **usuarios** (admins e usuários comuns), **pets** (animais anunciados) e **postagens** (relatos publicados por quem adotou). Os IDs são UUIDs (`CHAR(36)`) em vez de inteiros sequenciais, para não expor a contagem de registros nem permitir adivinhar URLs de outros pets/posts.
+
+### usuarios
+
+| Campo      | Tipo          | Descrição                   |
+| ---------- | ------------- | --------------------------- |
+| id         | char(36) (PK) | UUID gerado automaticamente |
+| nome       | string        | Nome do usuário             |
+| email      | string        | E-mail (login), único       |
+| senha_hash | string        | Senha criptografada         |
+| perfil     | string        | `admin` ou `usuario`        |
+| criado_em  | datetime      | Data de criação da conta    |
+
+### pets
+
+| Campo           | Tipo                        | Descrição                          |
+| --------------- | --------------------------- | ---------------------------------- |
+| id              | char(36) (PK)               | UUID gerado automaticamente        |
+| nome            | string                      | Nome do pet                        |
+| tipo            | string                      | Cachorro ou gato                   |
+| porte           | string                      | Pequeno, médio ou grande           |
+| idade           | string                      | Idade estimada                     |
+| cidade / bairro | string                      | Localização do pet                 |
+| foto_url        | string                      | Foto do animal                     |
+| historia        | text                        | História/descrição do pet          |
+| numero / email  | string                      | Contato do responsável pela doação |
+| status          | string                      | `disponivel` ou `adotado`          |
+| admin_id        | char(36) (FK → usuarios.id) | Admin que cadastrou o pet          |
+| criado_em       | datetime                    | Data do cadastro                   |
+
+### postagens
+
+| Campo      | Tipo                        | Descrição                              |
+| ---------- | --------------------------- | -------------------------------------- |
+| id         | char(36) (PK)               | UUID gerado automaticamente            |
+| pet_id     | char(36) (FK → pets.id)     | Pet relacionado ao post                |
+| usuario_id | char(36) (FK → usuarios.id) | Usuário logado que fez o post          |
+| foto_url   | string                      | Foto do pet já adotado                 |
+| relato     | text                        | Relato de como o pet está              |
+| curtidas   | int                         | Contador de reações (sem exigir login) |
+| criado_em  | datetime                    | Data da publicação                     |
+
+### Relacionamentos
+
+- Um **usuario** (perfil `admin`) cadastra vários **pets**.
+- Um **usuario** (perfil `usuario`) publica várias **postagens**, mas precisa estar logado para isso.
+- Um **pet** pode ter várias **postagens** associadas a ele.
+
+O script completo de criação do banco está em [`database.sql`](./database.sql).
 
 ## Como rodar o projeto
 
