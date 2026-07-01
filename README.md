@@ -1,6 +1,7 @@
 # Projeto Integrador (PI) - Adote-Me
 
 Mural de anúncios simples e centralizado para conectar pessoas que encontraram animais abandonados (ou têm filhotes para doar) com pessoas interessadas em adotar um pet.
+
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?logo=react&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/CSS-TailwindCSS-38B2AC?logo=tailwindcss&logoColor=white)
@@ -10,6 +11,7 @@ Mural de anúncios simples e centralizado para conectar pessoas que encontraram 
 ## Sobre o projeto
 
 PI para o Módulo de Desenvolvimento de Sistemas do curso Técnico em Informática do Senac.
+
 O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já organizam feiras de adoção de pets e fazem um bom trabalho, mas essa iniciativa é pouco divulgada e os anúncios de animais para adoção acabam se perdendo em redes sociais. O projeto centraliza esses anúncios em um site único, organizado e fácil de navegar.
 **Objetivo principal:** criar um site que funcione como um mural de anúncios, substituindo posts perdidos em redes sociais por uma listagem organizada de animais disponíveis para adoção.
 **Público-alvo:**
