@@ -8,7 +8,7 @@ USE adote_me;
 
 -- Tabela: usuarios
 CREATE TABLE usuarios (
-    id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    id CHAR(36) NOT NULL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     senha_hash VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE usuarios (
 
 -- Tabela: pets
 CREATE TABLE pets (
-    id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    id CHAR(36) NOT NULL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tipo ENUM('cachorro', 'gato') NOT NULL,
     porte ENUM('pequeno', 'medio', 'grande') NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE pets (
 
 -- Tabela: postagens
 CREATE TABLE postagens (
-    id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    id CHAR(36) NOT NULL PRIMARY KEY,
     pet_id CHAR(36) NOT NULL,
     usuario_id CHAR(36) NOT NULL,
     foto_url VARCHAR(255),

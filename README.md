@@ -34,6 +34,10 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 - ❌ Chat interno — o contato acontece direto por WhatsApp/e-mail informado no anúncio.
 - ❌ Cadastro/login para o adotante — qualquer pessoa pode navegar e ver os animais sem se cadastrar.
 - ❌ Cobrança de taxas ou doações em dinheiro pelo site.
+- ❌ Comentários nas postagens de pós-adoção — apenas reações (curtidas) são permitidas.
+- ❌ Edição/exclusão de postagem pelo próprio usuário após publicada.
+- ❌ Geolocalização/busca por distância — cidade/bairro são apenas texto livre, sem mapa.
+- ❌ Aplicativo mobile nativo — o projeto é apenas web.
 
 ## Protótipo
 
@@ -41,14 +45,14 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 ## Arquitetura e tecnologias
 
-| Camada                 | Tecnologia                                                                             |
-| ---------------------- | -------------------------------------------------------------------------------------- |
-| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                            |
-| **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC            |
-| **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário)   |
-| **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP) — IDs em UUID em vez de auto incremento |
-| **Ambiente local**     | XAMPP                                                                                  |
-| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                      |
+| Camada                 | Tecnologia                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| **Frontend**           | React JS + Vite, estilizado com TailwindCSS                                                   |
+| **Backend**            | PHP com o framework Slim4 — API própria (RESTful), seguindo arquitetura MVC                   |
+| **Autenticação**       | JWT (Json Web Token) para login, com autenticação por roles (dois perfis de usuário)          |
+| **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP) — IDs em UUID gerados no PHP com `ramsey/uuid` |
+| **Ambiente local**     | XAMPP                                                                                         |
+| **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                             |
 
 ## Estrutura de pastas
 
@@ -56,47 +60,47 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 ## Estrutura do banco de dados
 
-O banco é composto por três entidades principais: **usuarios** (admins e usuários comuns), **pets** (animais anunciados) e **postagens** (relatos publicados por quem adotou). Os IDs são UUIDs (`CHAR(36)`) em vez de inteiros sequenciais, para não expor a contagem de registros nem permitir adivinhar URLs de outros pets/posts.
+O banco é composto por três entidades principais: **usuarios** (admins e usuários comuns), **pets** (animais anunciados) e **postagens** (relatos publicados por quem adotou). Os IDs são UUIDs (`CHAR(36)`) em vez de inteiros sequenciais, para não expor a contagem de registros nem permitir adivinhar URLs de outros pets/posts. O UUID é gerado na aplicação PHP com a biblioteca [`ramsey/uuid`](https://github.com/ramsey/uuid) antes do INSERT.
 
 ### usuarios
 
-| Campo      | Tipo          | Descrição                   |
-| ---------- | ------------- | --------------------------- |
-| id         | char(36) (PK) | UUID gerado automaticamente |
-| nome       | string        | Nome do usuário             |
-| email      | string        | E-mail (login), único       |
-| senha_hash | string        | Senha criptografada         |
-| perfil     | string        | `admin` ou `usuario`        |
-| criado_em  | datetime      | Data de criação da conta    |
+| Campo      | Tipo          | Descrição                                |
+| ---------- | ------------- | ---------------------------------------- |
+| id         | char(36) (PK) | UUID gerado pela aplicação (ramsey/uuid) |
+| nome       | string        | Nome do usuário                          |
+| email      | string        | E-mail (login), único                    |
+| senha_hash | string        | Senha criptografada                      |
+| perfil     | string        | `admin` ou `usuario`                     |
+| criado_em  | datetime      | Data de criação da conta                 |
 
 ### pets
 
-| Campo           | Tipo                        | Descrição                          |
-| --------------- | --------------------------- | ---------------------------------- |
-| id              | char(36) (PK)               | UUID gerado automaticamente        |
-| nome            | string                      | Nome do pet                        |
-| tipo            | string                      | Cachorro ou gato                   |
-| porte           | string                      | Pequeno, médio ou grande           |
-| idade           | string                      | Idade estimada                     |
-| cidade / bairro | string                      | Localização do pet                 |
-| foto_url        | string                      | Foto do animal                     |
-| historia        | text                        | História/descrição do pet          |
-| numero / email  | string                      | Contato do responsável pela doação |
-| status          | string                      | `disponivel` ou `adotado`          |
-| admin_id        | char(36) (FK → usuarios.id) | Admin que cadastrou o pet          |
-| criado_em       | datetime                    | Data do cadastro                   |
+| Campo           | Tipo                        | Descrição                                |
+| --------------- | --------------------------- | ---------------------------------------- |
+| id              | char(36) (PK)               | UUID gerado pela aplicação (ramsey/uuid) |
+| nome            | string                      | Nome do pet                              |
+| tipo            | string                      | Cachorro ou gato                         |
+| porte           | string                      | Pequeno, médio ou grande                 |
+| idade           | string                      | Idade estimada                           |
+| cidade / bairro | string                      | Localização do pet                       |
+| foto_url        | string                      | Foto do animal                           |
+| historia        | text                        | História/descrição do pet                |
+| numero / email  | string                      | Contato do responsável pela doação       |
+| status          | string                      | `disponivel` ou `adotado`                |
+| admin_id        | char(36) (FK → usuarios.id) | Admin que cadastrou o pet                |
+| criado_em       | datetime                    | Data do cadastro                         |
 
 ### postagens
 
-| Campo      | Tipo                        | Descrição                              |
-| ---------- | --------------------------- | -------------------------------------- |
-| id         | char(36) (PK)               | UUID gerado automaticamente            |
-| pet_id     | char(36) (FK → pets.id)     | Pet relacionado ao post                |
-| usuario_id | char(36) (FK → usuarios.id) | Usuário logado que fez o post          |
-| foto_url   | string                      | Foto do pet já adotado                 |
-| relato     | text                        | Relato de como o pet está              |
-| curtidas   | int                         | Contador de reações (sem exigir login) |
-| criado_em  | datetime                    | Data da publicação                     |
+| Campo      | Tipo                        | Descrição                                |
+| ---------- | --------------------------- | ---------------------------------------- |
+| id         | char(36) (PK)               | UUID gerado pela aplicação (ramsey/uuid) |
+| pet_id     | char(36) (FK → pets.id)     | Pet relacionado ao post                  |
+| usuario_id | char(36) (FK → usuarios.id) | Usuário logado que fez o post            |
+| foto_url   | string                      | Foto do pet já adotado                   |
+| relato     | text                        | Relato de como o pet está                |
+| curtidas   | int                         | Contador de reações (sem exigir login)   |
+| criado_em  | datetime                    | Data da publicação                       |
 
 ### Relacionamentos
 
@@ -139,3 +143,6 @@ Boas práticas:
 ## Status
 
 Projeto em desenvolvimento — Projeto Integrador do curso.
+
+<!-- ## Licença
+> Defina aqui a licença do projeto (ex: MIT), se aplicável. -->
