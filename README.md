@@ -35,6 +35,10 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 - ❌ Cadastro/login para o adotante — qualquer pessoa pode navegar e ver os animais sem se cadastrar.
 - ❌ Cobrança de taxas ou doações em dinheiro pelo site.
 
+## Protótipo
+
+> Protótipo das telas em produção no Canva — o link e os prints serão adicionados aqui assim que estiver pronto.
+
 ## Arquitetura e tecnologias
 
 | Camada                 | Tecnologia                                                                             |
@@ -45,6 +49,10 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 | **Banco de dados**     | MySQL, sem ORM (queries via PDO nativo do PHP) — IDs em UUID em vez de auto incremento |
 | **Ambiente local**     | XAMPP                                                                                  |
 | **Outras ferramentas** | Canva (prototipagem) · GitHub (versionamento e gestão do projeto)                      |
+
+## Estrutura de pastas
+
+> Seção em construção — a árvore de diretórios do repositório será adicionada aqui em breve.
 
 ## Estrutura do banco de dados
 
@@ -98,9 +106,30 @@ O banco é composto por três entidades principais: **usuarios** (admins e usuá
 
 O script completo de criação do banco está em [`database.sql`](./database.sql).
 
+## Endpoints da API
+
+> Seção em construção — a documentação das rotas (endpoints) da API será adicionada aqui em breve.
+
 ## Como rodar o projeto
 
 > Seção em construção — assim que o setup do frontend/backend estiver definido, adicionaremos aqui os comandos de instalação e execução , configuração do XAMPP/MySQL, variáveis de ambiente, etc.
+
+## Padrão de commits
+
+O projeto segue o padrão [Conventional Commits](https://www.conventionalcommits.org/), com mensagens no imperativo e em português.
+| Tipo | Quando usar | Exemplo |
+| --- | --- | --- |
+| `feat` | Nova funcionalidade ou parte da estrutura do sistema | `feat: adiciona script de criação do banco de dados` |
+| `fix` | Correção de bug | `fix: corrige filtro de porte na listagem de pets` |
+| `docs` | Mudanças em documentação (README, comentários) | `docs: atualiza README com informações do projeto` |
+| `chore` | Tarefas de organização/configuração (rename, configs) | `chore: renomeia adote-me.sql para database.sql` |
+| `refactor` | Reorganização de código sem mudar comportamento | `refactor: reorganiza rotas da API` |
+
+Boas práticas:
+
+- Verbo no imperativo ("adiciona", "corrige"), não no gerúndio ou particípio.
+- Mensagem curta e objetiva na primeira linha (até ~50 caracteres).
+- Escopo opcional entre parênteses, ex: `feat(database): adiciona schema inicial`.
 
 ## Equipe
 
