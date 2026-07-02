@@ -62,9 +62,7 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 O banco é composto por três entidades principais: **usuarios** (admins e usuários comuns), **pets** (animais anunciados) e **postagens** (relatos publicados por quem adotou). Os IDs são UUIDs (`CHAR(36)`) em vez de inteiros sequenciais, para não expor a contagem de registros nem permitir adivinhar URLs de outros pets/posts. O UUID é gerado na aplicação PHP com a biblioteca [`ramsey/uuid`](https://github.com/ramsey/uuid) antes do INSERT.
 
-<div align="center">
-  <img src="file:///C:/Users/Pedro%20B.%20Pospichil/Downloads/drawSQL-image-export-2026-07-02.webp" width="400px">
-</div>
+![Diagrama ER](file:///C:/Users/Pedro%20B.%20Pospichil/Downloads/drawSQL-image-export-2026-07-02.webp)
 
 ### usuarios
 
