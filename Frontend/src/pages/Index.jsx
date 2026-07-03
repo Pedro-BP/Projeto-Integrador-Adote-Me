@@ -1,3 +1,8 @@
-export default function Index(){
-    return (<div>Lol</div>);
+export default function Index() {
+    return (<div>
+        
+                         
+
+    </div>);
+
 }
