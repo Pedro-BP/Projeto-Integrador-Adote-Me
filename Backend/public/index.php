@@ -19,6 +19,8 @@ $app->add(function ($request, $handler) {
         ->withHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 });
 
+$app->addErrorMiddleware(true, true, true);
+
 // Carregar Rotas
 $routes = require __DIR__ . "/../src/routes.php";
 $routes($app);
