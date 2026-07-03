@@ -19,7 +19,6 @@ class Usuario
     {
         $db = Connection::get();
         $id = Uuid::uuid4()->toString();
-
         $stmt = $db->prepare(
             "INSERT INTO usuarios (id, nome, email, senha_hash, perfil)
              VALUES (:id, :nome, :email, :senha_hash, :perfil)"
@@ -31,7 +30,6 @@ class Usuario
             'senha_hash'    => password_hash($dados['senha'], PASSWORD_DEFAULT),
             'perfil'        => $dados['perfil'] ?? 'usuario',
         ]);
-
         return $id;
     }
 
