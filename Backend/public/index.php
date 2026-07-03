@@ -1,8 +1,10 @@
 <?php
-
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Slim\Factory\AppFactory;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+$dotenv->load();
 
 $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
@@ -15,6 +17,9 @@ $app->add(function ($request, $handler) {
         ->withHeader("Access-Control-Allow-Headers", "Content-Type")
         ->withHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 });
+
+// Error Middleware (mostra os erro maluco)
+$app->addErrorMiddleware(true, true, true);
 
 // Carregar Rotas
 $routes = require __DIR__ . "/../src/routes.php";
