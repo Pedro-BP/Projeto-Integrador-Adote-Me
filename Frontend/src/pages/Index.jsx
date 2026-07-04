@@ -2,21 +2,8 @@ import { useState } from "react";
 
 /* ============================================================
    TUDO QUE ESTÁ AQUI EM CIMA fica FORA do componente Index.
-   São "ajudantes": um ícone reutilizável e listas de dados.
+   Listas de dados usadas pela página.
    ============================================================ */
-
-// Ícone de pegada de pata, usado várias vezes na página
-function Paw({ className = "" }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} fill="currentColor" aria-hidden="true">
-      <ellipse cx="24" cy="32" rx="12.5" ry="10.5" />
-      <ellipse cx="9" cy="15" rx="5.2" ry="7" transform="rotate(-18 9 15)" />
-      <ellipse cx="20" cy="8" rx="5" ry="7.2" transform="rotate(-5 20 8)" />
-      <ellipse cx="31" cy="8.5" rx="5" ry="7.2" transform="rotate(6 31 8.5)" />
-      <ellipse cx="41" cy="16" rx="5.2" ry="7" transform="rotate(20 41 16)" />
-    </svg>
-  );
-}
 
 const NAV_LINKS = [
   { href: "#sobre", label: "Sobre" },
@@ -39,8 +26,8 @@ const HELP_CARDS = [
     cta: "Ver animais para adoção",
   },
   {
-    title: "Doe",
-    text: "Sua contribuição mensal cobre ração, remédio e atendimento veterinário de urgência.",
+    title: "Entrega voluntaria",
+    text: "Não pode mais cuidar do seu pet? Faça uma doação responsável. Nossa ONG ajudará a encontrar um novo lar seguro e cheio de carinho.",
     cta: "Fazer uma doação",
   },
   {
@@ -82,9 +69,8 @@ export default function Index() {
       {/* ---------- Header ---------- */}
       <header className="sticky top-0 z-50 border-b border-[#1E3D32]/[0.14] bg-[#FAF7EF]/90 backdrop-blur-sm">
         <div className="flex items-center justify-between px-6 py-4">
-          <a href="#top" className="flex items-center gap-2.5 font-[Fraunces,serif] text-xl font-bold text-[#1E3D32]">
-            <Paw className="h-[26px] w-[26px] text-[#C15A2B]" />
-            Instituto Focinho Feliz
+          <a href="#top" className="flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]">
+            Adote-Me
           </a>
 
           <nav className="hidden gap-8 text-sm font-medium text-[#46564B] md:flex" aria-label="Navegação principal">
@@ -100,7 +86,7 @@ export default function Index() {
               href="#doar"
               className="hidden rounded-full bg-[#C15A2B] px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#a94a20] sm:inline-flex"
             >
-              Doar agora
+              D
             </a>
             <button
               className="inline-flex rounded-[10px] border border-[#1E3D32]/[0.14] p-2 text-[#1E3D32] md:hidden"
@@ -135,13 +121,13 @@ export default function Index() {
       <section id="top" className="overflow-hidden px-6 pb-24 pt-16 md:pt-20">
         <div className="mx-auto grid max-w-[1120px] items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <span className="mb-5 inline-flex items-center gap-2 font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-[#C15A2B]">
-              <Paw className="h-3.5 w-3.5" /> Resgate &amp; adoção responsável
+            <span className="mb-5 inline-flex items-center gap-2 font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-cyan-600">
+              Resgate &amp; adoção responsável
             </span>
 
-            <h1 className="mb-5 max-w-xl font-[Fraunces,serif] text-[2.3rem] font-bold leading-[1.08] tracking-tight text-[#1E3D32] sm:text-5xl lg:text-[3.6rem]">
+            <h1 className="mb-5 max-w-xl font-[Fraunces,serif] text-[2.3rem] font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl lg:text-[3.6rem]">
               Cada resgate é{" "}
-              <em className="font-medium not-italic italic text-[#C15A2B]">um recomeço.</em>
+              <em className="font-medium not-italic italic text-cyan-500">um recomeço.</em>
             </h1>
 
             <p className="mb-8 max-w-[46ch] text-lg text-[#46564B]">
@@ -152,13 +138,13 @@ export default function Index() {
             <div className="flex flex-wrap gap-3.5">
               <a
                 href="#ajudar"
-                className="inline-flex items-center justify-center rounded-full bg-[#C15A2B] px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#a94a20]"
+                className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-stone-800"
               >
                 Quero adotar
               </a>
               <a
                 href="#doar"
-                className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-[#1E3D32] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-stone-800 hover:text-white"
               >
                 Fazer uma doação
               </a>
@@ -166,7 +152,6 @@ export default function Index() {
           </div>
 
           <div className="relative flex aspect-[4/5] items-center justify-center rounded-[28px] bg-gradient-to-br from-[#1E3D32] via-[#2F5A48] to-[#E3A63D]">
-            <Paw className="h-[46%] w-[46%] text-white/[0.16]" />
             <div className="absolute inset-x-5 bottom-5 rounded-2xl bg-[#1C2620]/55 px-4 py-3.5 font-[IBM_Plex_Mono,monospace] text-sm text-white backdrop-blur-sm">
               Do resgate nas ruas ao colo de uma família.
             </div>
@@ -175,7 +160,7 @@ export default function Index() {
       </section>
 
       {/* ---------- Stats ---------- */}
-      <section className="border-y border-[#1E3D32]/[0.14] bg-[#E7EEE5]">
+      <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50">
         <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-4">
           {STATS.map((s) => (
             <div key={s.label}>
@@ -187,22 +172,22 @@ export default function Index() {
           ))}
         </div>
       </section>
-
-      {/* ---------- Sobre ---------- */}
       <section id="sobre" className="px-6 py-24">
         <div className="mx-auto grid max-w-[1120px] gap-10 md:grid-cols-2 md:items-center">
           <div>
             <h2 className="mb-6 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem]">
-              Sobre o instituto
+              Sobre o Adote-Me
             </h2>
             <p className="mb-4 text-[#46564B]">
-              Começamos como um grupo de voluntários atendendo chamados de resgate na região
-              metropolitana. Hoje mantemos um abrigo próprio, parceria com clínicas veterinárias
-              e uma rede de lares temporários.
+              No Adote-Me, acreditamos que todo animal merece uma segunda chance. 
+              Nossa missão é conectar cães e gatos que aguardam por um lar a pessoas dispostas a oferecer amor, cuidado e responsabilidade. 
+              Por meio da nossa plataforma, facilitamos o processo de adoção responsável, aproximando protetores, ONGs e futuros tutores de forma simples, 
+              segura e organizada.
             </p>
             <p className="mb-4 text-[#46564B]">
-              Cada animal que chega passa por avaliação veterinária, vacinação e, quando
-              necessário, tratamento prolongado antes de entrar no programa de adoção.
+             Mais do que um site de adoção, queremos incentivar a conscientização sobre a importância de combater o abandono e promover a guarda responsável. 
+             Cada adoção representa uma nova história, um recomeço e a oportunidade de transformar a vida de um animal e de uma família. 
+             Junte-se ao Adote-Me, encontre seu novo melhor amigo e faça parte dessa corrente de solidariedade e amor pelos animais.
             </p>
             <ul className="mt-6 grid gap-3.5">
               {[
@@ -211,21 +196,18 @@ export default function Index() {
                 "Acompanhamento pós-adoção",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-[0.95rem] text-[#1C2620]">
-                  <Paw className="mt-0.5 h-[18px] w-[18px] flex-shrink-0 text-[#C15A2B]" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-[#E3A63D] to-[#C15A2B]">
-            <Paw className="h-[38%] w-[38%] text-white/35" />
-          </div>
+          <div className="flex aspect-square items-center justify-center rounded-3xl bg-gradient-to-br from-[#E3A63D] to-[#C15A2B]" />
         </div>
       </section>
 
       {/* ---------- Como ajudar ---------- */}
-      <section id="ajudar" className="bg-[#E7EEE5] px-6 py-24">
+      <section id="ajudar" className="bg-cyan-50 px-6 py-24">
         <div className="mx-auto max-w-[1120px]">
           <div className="mb-12 max-w-xl">
             <h2 className="mb-3.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem]">
@@ -242,10 +224,9 @@ export default function Index() {
                 key={c.title}
                 className="flex flex-col gap-3.5 rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-7"
               >
-                <Paw className="h-6 w-6 text-[#C15A2B]" />
                 <h3 className="font-[Fraunces,serif] text-xl text-[#1E3D32]">{c.title}</h3>
                 <p className="flex-grow text-sm text-[#46564B]">{c.text}</p>
-                <a href="#contato" className="text-sm font-semibold text-[#C15A2B] hover:underline">
+                <a href="#contato" className="text-sm font-semibold text-cyan-600 hover:underline">
                   {c.cta} →
                 </a>
               </div>
@@ -269,9 +250,7 @@ export default function Index() {
           <div className="grid gap-6 sm:grid-cols-3">
             {RESCUES.map((r) => (
               <div key={r.name} className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white">
-                <div className="flex aspect-[16/11] items-center justify-center bg-gradient-to-br from-[#2F5A48] to-[#1E3D32]">
-                  <Paw className="h-[34%] w-[34%] text-white/20" />
-                </div>
+                <div className="flex aspect-[16/11] items-center justify-center bg-gradient-to-br from-[#2F5A48] to-[#1E3D32]" />
                 <div className="p-5">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="font-[Fraunces,serif] text-lg font-bold text-[#1E3D32]">{r.name}</span>
@@ -290,27 +269,26 @@ export default function Index() {
       {/* ---------- CTA ---------- */}
       <div
         id="doar"
-        className="relative mx-6 mb-24 overflow-hidden rounded-[28px] bg-[#1E3D32] px-8 py-14 text-center text-white"
+        className="relative mx-6 mb-24 overflow-hidden rounded-[28px] bg-cyan-700 px-8 py-14 text-center text-white"
       >
-        <Paw className="pointer-events-none absolute -bottom-10 -right-8 h-[220px] w-[220px] text-white/[0.06]" />
         <h2 className="relative mb-3 font-[Fraunces,serif] text-3xl font-bold sm:text-[2.2rem]">
-          Sua doação mantém o resgate funcionando
+          Encontre um novo melhor amigo
         </h2>
         <p className="relative mx-auto mb-7 max-w-[46ch] text-white/80">
-          Com R$30 por mês você ajuda a custear ração, vacinas e atendimento de urgência para os animais do abrigo.
+          Cada adoção transforma duas vidas: a do animal e a da família que o recebe. Conheça nossos pets disponíveis e ofereça um lar cheio de amor.
         </p>
         <div className="relative flex flex-wrap justify-center gap-3.5">
           <a
             href="#contato"
             className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-transform hover:-translate-y-0.5"
           >
-            Doar agora
+            Adotar agora
           </a>
           <a
             href="#ajudar"
-            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-500"
           >
-            Conhecer outras formas de ajudar
+           Ver pets disponíveis
           </a>
         </div>
       </div>
@@ -320,7 +298,7 @@ export default function Index() {
         <div className="mx-auto grid max-w-[1120px] gap-8 sm:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="mb-2.5 flex items-center gap-2.5 font-[Fraunces,serif] font-bold text-[#1E3D32]">
-              <Paw className="h-5 w-5 text-[#C15A2B]" /> Instituto Focinho Feliz
+              Instituto Focinho Feliz
             </div>
             <p className="max-w-[34ch] text-sm text-[#46564B]">
               Resgate, tratamento e adoção responsável de animais em situação de vulnerabilidade.
