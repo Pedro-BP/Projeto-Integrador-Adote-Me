@@ -8,15 +8,14 @@ import { useState } from "react";
 const NAV_LINKS = [
   { href: "#sobre", label: "Sobre" },
   { href: "#ajudar", label: "Como ajudar" },
-  { href: "#resgates", label: "Resgates recentes" },
+  { href: "#resgates", label: "Recém-acolhidos" },
   { href: "#contato", label: "Contato" },
 ];
 
 const STATS = [
-  { value: "1.240+", label: "animais resgatados" },
+  { value: "1.240+", label: "animais acolhidos" },
   { value: "890", label: "adoções concluídas" },
-  { value: "15", label: "anos de atuação" },
-  { value: "60", label: "voluntários ativos" },
+  { value: "1", label: "ano de atuação" },
 ];
 
 const HELP_CARDS = [
@@ -30,26 +29,21 @@ const HELP_CARDS = [
     text: "Não pode mais cuidar do seu pet? Faça uma doação responsável. Nossa ONG ajudará a encontrar um novo lar seguro e cheio de carinho.",
     cta: "Fazer uma doação",
   },
-  {
-    title: "Seja voluntário",
-    text: "Ajude no abrigo, no transporte de resgates ou compartilhando nosso trabalho.",
-    cta: "Quero ser voluntário",
-  },
 ];
 
 const RESCUES = [
   {
     name: "Mel",
     status: "Adotada",
-    text: "Encontrada abandonada em uma obra, hoje vive com a família Andrade.",
+    text: "Chegou à Adote-Me em busca de um novo lar. Hoje faz parte da família Medeiros.",
   },
   {
-    name: "Bento",
-    status: "Em tratamento",
+    name: "Thor",
+    status: "Disponível",
     text: "Resgatado com uma pata machucada, está em recuperação no abrigo.",
   },
   {
-    name: "Nina",
+    name: "Pandora",
     status: "Disponível",
     text: "Filhote sociável, já vacinada, esperando por um lar.",
   },
@@ -122,17 +116,17 @@ export default function Index() {
         <div className="mx-auto grid max-w-[1120px] items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
           <div>
             <span className="mb-5 inline-flex items-center gap-2 font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-cyan-600">
-              Resgate &amp; adoção responsável
+              Conectando pets a novos lares
             </span>
 
             <h1 className="mb-5 max-w-xl font-[Fraunces,serif] text-[2.3rem] font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl lg:text-[3.6rem]">
-              Cada resgate é{" "}
-              <em className="font-medium not-italic italic text-cyan-500">um recomeço.</em>
+              Cada adoção é{" "}
+              <em className="font-medium not-italic italic text-cyan-500">um novo começo.</em>
             </h1>
 
             <p className="mb-8 max-w-[46ch] text-lg text-[#46564B]">
-              Atuamos no resgate, tratamento e adoção de animais em situação de risco,
-              conectando cada bicho resgatado a um lar responsável.
+              Acreditamos que todo animal merece um lar. Facilitamos a adoção responsável,
+              aproximando pets de famílias que possam oferecer amor e cuidados por toda a vida
             </p>
 
             <div className="flex flex-wrap gap-3.5">
@@ -153,7 +147,7 @@ export default function Index() {
 
           <div className="relative flex aspect-[4/5] items-center justify-center rounded-[28px] bg-gradient-to-br from-[#1E3D32] via-[#2F5A48] to-[#E3A63D]">
             <div className="absolute inset-x-5 bottom-5 rounded-2xl bg-[#1C2620]/55 px-4 py-3.5 font-[IBM_Plex_Mono,monospace] text-sm text-white backdrop-blur-sm">
-              Do resgate nas ruas ao colo de uma família.
+              Do Adote-Me para o colo de uma família.
             </div>
           </div>
         </div>
@@ -161,7 +155,7 @@ export default function Index() {
 
       {/* ---------- Stats ---------- */}
       <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50">
-        <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-4">
+        <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-3">
           {STATS.map((s) => (
             <div key={s.label}>
               <div className="font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]">{s.value}</div>
@@ -179,21 +173,21 @@ export default function Index() {
               Sobre o Adote-Me
             </h2>
             <p className="mb-4 text-[#46564B]">
-              No Adote-Me, acreditamos que todo animal merece uma segunda chance. 
-              Nossa missão é conectar cães e gatos que aguardam por um lar a pessoas dispostas a oferecer amor, cuidado e responsabilidade. 
-              Por meio da nossa plataforma, facilitamos o processo de adoção responsável, aproximando protetores, ONGs e futuros tutores de forma simples, 
+              No Adote-Me, acreditamos que todo animal merece uma segunda chance.
+              Nossa missão é conectar cães e gatos que aguardam por um lar a pessoas dispostas a oferecer amor, cuidado e responsabilidade.
+              Por meio da nossa plataforma, facilitamos o processo de adoção responsável, aproximando protetores, ONGs e futuros tutores de forma simples,
               segura e organizada.
             </p>
             <p className="mb-4 text-[#46564B]">
-             Mais do que um site de adoção, queremos incentivar a conscientização sobre a importância de combater o abandono e promover a guarda responsável. 
-             Cada adoção representa uma nova história, um recomeço e a oportunidade de transformar a vida de um animal e de uma família. 
-             Junte-se ao Adote-Me, encontre seu novo melhor amigo e faça parte dessa corrente de solidariedade e amor pelos animais.
+              Mais do que um site de adoção, queremos incentivar a conscientização sobre a importância de combater o abandono e promover a guarda responsável.
+              Cada adoção representa uma nova história, um recomeço e a oportunidade de transformar a vida de um animal e de uma família.
+              Junte-se ao Adote-Me, encontre seu novo melhor amigo e faça parte dessa corrente de solidariedade e amor pelos animais.
             </p>
             <ul className="mt-6 grid gap-3.5">
               {[
-                "Resgate 24h para casos de urgência",
-                "Castração e vacinação de todos os animais",
-                "Acompanhamento pós-adoção",
+                "🏠 Acolhimento responsável",
+                "🐾 Animais disponíveis para adoção",
+                "❤️ Adoção consciente",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-[0.95rem] text-[#1C2620]">
                   {item}
@@ -218,7 +212,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2">
             {HELP_CARDS.map((c) => (
               <div
                 key={c.title}
@@ -280,15 +274,15 @@ export default function Index() {
         <div className="relative flex flex-wrap justify-center gap-3.5">
           <a
             href="#contato"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-cyan-600 hover:text-white"
           >
             Adotar agora
           </a>
           <a
             href="#ajudar"
-            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-500"
+            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-600"
           >
-           Ver pets disponíveis
+            Ver pets disponíveis
           </a>
         </div>
       </div>
@@ -298,20 +292,20 @@ export default function Index() {
         <div className="mx-auto grid max-w-[1120px] gap-8 sm:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="mb-2.5 flex items-center gap-2.5 font-[Fraunces,serif] font-bold text-[#1E3D32]">
-              Instituto Focinho Feliz
+              Adote-Me
             </div>
             <p className="max-w-[34ch] text-sm text-[#46564B]">
-              Resgate, tratamento e adoção responsável de animais em situação de vulnerabilidade.
+              Acolhimento e adoção responsável de animais em busca de um novo lar.
             </p>
           </div>
 
           <div>
             <h4 className="mb-3.5 font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.06em] text-[#1C2620]">
-              Instituto
+              ONG
             </h4>
             <ul className="grid gap-2.5">
               <li><a href="#sobre" className="text-sm text-[#46564B] hover:text-[#1E3D32]">Sobre</a></li>
-              <li><a href="#resgates" className="text-sm text-[#46564B] hover:text-[#1E3D32]">Resgates recentes</a></li>
+              <li><a href="#resgates" className="text-sm text-[#46564B] hover:text-[#1E3D32]">Recém-acolhidos</a></li>
               <li><a href="#ajudar" className="text-sm text-[#46564B] hover:text-[#1E3D32]">Como ajudar</a></li>
             </ul>
           </div>
@@ -321,15 +315,15 @@ export default function Index() {
               Contato
             </h4>
             <ul className="grid gap-2.5">
-              <li><a href="mailto:contato@focinhofeliz.org" className="text-sm text-[#46564B] hover:text-[#1E3D32]">contato@focinhofeliz.org</a></li>
-              <li><a href="tel:+550000000" className="text-sm text-[#46564B] hover:text-[#1E3D32]">(00) 0000-0000</a></li>
+              <li><a href="mailto:contato@focinhofeliz.org" className="text-sm text-[#46564B] hover:text-[#1E3D32]">adotemetramandai@gmail.com</a></li>
+              <li><a href="tel:+550000000" className="text-sm text-[#46564B] hover:text-[#1E3D32]">(51) 9101-3434</a></li>
               <li><a href="#" className="text-sm text-[#46564B] hover:text-[#1E3D32]">Instagram</a></li>
             </ul>
           </div>
         </div>
 
         <div className="mx-auto mt-10 max-w-[1120px] border-t border-[#1E3D32]/[0.14] pt-5 text-sm text-[#46564B]">
-          © {new Date().getFullYear()} Instituto Focinho Feliz. Todos os direitos reservados.
+          © {new Date().getFullYear()} Adote-Me. Todos os direitos reservados.
         </div>
       </footer>
     </div>
