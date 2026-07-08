@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function Introducao() {
   return (
     <section id="top" className="overflow-hidden px-6 pb-24 pt-16 md:pt-20">
       <div className="mx-auto grid max-w-[1120px] items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">

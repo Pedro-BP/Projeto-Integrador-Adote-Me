@@ -1,14 +1,9 @@
-import Header from "./components/templates/Header";
-import Login from "./pages/Login";
-import Index from "./pages/Index";
-import Cadastro from "./pages/Cadastro";
-import Animais from "./pages/Animais";
-import Animal from "./pages/Animal";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
     <>
-      <Animais />
+      <Home />
     </>
   );
 }

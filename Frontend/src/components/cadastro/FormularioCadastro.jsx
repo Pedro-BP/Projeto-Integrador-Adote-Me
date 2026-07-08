@@ -1,11 +1,12 @@
 import { useState } from "react";
-import PasswordToggleButton from "../templates/PasswordToggleButton";
+import BotaoMostrarSenha from "../templates/BotaoMostrarSenha";
 
-export default function LoginForm() {
+export default function FormularioCadastro() {
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [lembrar, setLembrar] = useState(false);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
@@ -13,8 +14,13 @@ export default function LoginForm() {
     e.preventDefault();
     setErro("");
 
-    if (!email || !senha) {
-      setErro("Preencha e-mail e senha para continuar.");
+    if (!nome || !email || !senha || !confirmarSenha) {
+      setErro("Preencha todos os campos para continuar.");
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      setErro("As senhas não coincidem.");
       return;
     }
 
@@ -33,7 +39,7 @@ export default function LoginForm() {
         </a>
 
         <h1 className="mb-2 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl">
-          Bem-vindo de volta
+          Crie sua conta
         </h1>
 
         {erro && (
@@ -47,10 +53,23 @@ export default function LoginForm() {
 
         <form onSubmit={handleSubmit} noValidate className="grid gap-5">
           <div>
-            <label
-              htmlFor="email"
-              className="mb-1.5 block text-sm font-medium text-[#1C2620]"
-            >
+            <label htmlFor="nome" className="mb-1.5 block text-sm font-medium text-[#1C2620]">
+              Nome completo
+            </label>
+            <input
+              id="nome"
+              type="text"
+              autoComplete="name"
+              required
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Seu nome"
+              className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#1C2620]">
               E-mail
             </label>
             <input
@@ -66,64 +85,56 @@ export default function LoginForm() {
           </div>
 
           <div>
-            <div className="mb-1.5 flex items-center justify-between">
-              <label
-                htmlFor="senha"
-                className="block text-sm font-medium text-[#1C2620]"
-              >
-                Senha
-              </label>
-              <a
-                href="#"
-                className="text-sm font-medium text-cyan-600 hover:underline"
-              >
-                Esqueceu a senha?
-              </a>
-            </div>
+            <label htmlFor="senha" className="mb-1.5 block text-sm font-medium text-[#1C2620]">
+              Senha
+            </label>
             <div className="relative">
               <input
                 id="senha"
                 type={mostrarSenha ? "text" : "password"}
-                autoComplete="current-password"
+                autoComplete="new-password"
                 required
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 placeholder="••••••••"
                 className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 pr-11 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
               />
-              <PasswordToggleButton
+              <BotaoMostrarSenha
                 visible={mostrarSenha}
                 onToggle={() => setMostrarSenha((v) => !v)}
               />
             </div>
           </div>
 
-          <label className="flex items-center gap-2 text-sm text-[#46564B]">
+          <div>
+            <label htmlFor="confirmarSenha" className="mb-1.5 block text-sm font-medium text-[#1C2620]">
+              Confirmar senha
+            </label>
             <input
-              type="checkbox"
-              checked={lembrar}
-              onChange={(e) => setLembrar(e.target.checked)}
-              className="h-4 w-4 rounded border-[#1E3D32]/30 text-cyan-600 focus:ring-cyan-600/30"
+              id="confirmarSenha"
+              type={mostrarSenha ? "text" : "password"}
+              autoComplete="new-password"
+              required
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+              placeholder="••••••••"
+              className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
             />
-            Lembrar de mim
-          </label>
+          </div>
 
           <button
             type="submit"
             disabled={carregando}
             className="mt-2 inline-flex items-center justify-center rounded-full bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-stone-800 disabled:pointer-events-none disabled:opacity-60"
           >
-            {carregando ? "Entrando..." : "Entrar"}
+            {carregando ? "Criando conta..." : "Criar conta"}
           </button>
         </form>
 
         <p className="mt-8 text-center text-sm text-[#46564B]">
-          Ainda não tem conta?{" "}
-          <a
-            href="/cadastro"
-            className="font-semibold text-cyan-600 hover:underline"
-          >
-            Cadastre-se
+          Já tem conta?{" "}
+          <a href="/login" className="font-semibold text-cyan-600 hover:underline">
+            Entrar
           </a>
         </p>
       </div>

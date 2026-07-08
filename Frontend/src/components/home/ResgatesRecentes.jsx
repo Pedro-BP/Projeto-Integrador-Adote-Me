@@ -16,7 +16,7 @@ const RESCUES = [
   },
 ];
 
-export default function RecentRescues() {
+export default function ResgatesRecentes() {
   return (
     <section id="resgates" className="px-6 py-24">
       <div className="mx-auto max-w-[1120px]">

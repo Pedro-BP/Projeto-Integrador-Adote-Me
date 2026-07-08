@@ -1,11 +1,11 @@
-import CadastroForm from "../components/cadastro/CadastroForm";
-import AuthDecorativePanel from "../components/templates/AuthDecorativePanel";
+import FormularioCadastro from "../components/cadastro/FormularioCadastro";
+import PainelDecorativo from "../components/templates/PainelDecorativo";
 
 export default function Cadastro() {
   return (
     <div className="flex min-h-screen bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
-      <CadastroForm />
-      <AuthDecorativePanel />
+      <FormularioCadastro />
+      <PainelDecorativo />
     </div>
   );
 }

@@ -20,7 +20,7 @@ const PET_FACTS = [
   { label: "Localização", value: `${PET.bairro}, ${PET.cidade}` },
 ];
 
-export default function PetHero() {
+export default function DestaquePet() {
   const whatsappHref = `https://wa.me/${PET.whatsapp}?text=${encodeURIComponent(
     `Olá! Vi o ${PET.nome} no Adote-Me e tenho interesse em adotá-lo(a).`,
   )}`;

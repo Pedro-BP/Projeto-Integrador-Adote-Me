@@ -16,7 +16,7 @@ const OTHER_PETS = [
   },
 ];
 
-export default function OtherPets() {
+export default function OutrosPets() {
   return (
     <section className="px-6 py-20">
       <div className="mx-auto max-w-280">
@@ -42,7 +42,7 @@ export default function OtherPets() {
                   <span className="font-[Fraunces,serif] text-lg font-bold text-[#1E3D32]">
                     {p.name}
                   </span>
-                  <span className="rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-[0.05em] text-[#1E3D32]">
+                  <span className="rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider text-[#1E3D32]">
                     {p.status}
                   </span>
                 </div>

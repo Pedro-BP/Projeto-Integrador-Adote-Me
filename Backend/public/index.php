@@ -14,12 +14,17 @@ $app->add(function ($request, $handler) {
     $response = $handler->handle($request);
     return $response
         ->withHeader("Access-Control-Allow-Origin", "*")
-        ->withHeader("Access-Control-Allow-Headers", "Content-Type")
+        ->withHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
         ->withHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 });
 
 // Error Middleware (mostra os erro maluco)
 $app->addErrorMiddleware(true, true, true);
+
+// Responde preflight (OPTIONS) de qualquer rota antes de chegar no auth/404
+$app->options('/{routes:.+}', function ($request, $response) {
+    return $response;
+});
 
 // Carregar Rotas
 $routes = require __DIR__ . "/../src/routes.php";

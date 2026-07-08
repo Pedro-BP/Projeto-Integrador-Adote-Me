@@ -1,4 +1,4 @@
-export default function CallToAction() {
+export default function ChamadaParaAcao() {
   return (
     <div
       id="doar"

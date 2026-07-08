@@ -11,7 +11,7 @@ const HELP_CARDS = [
   },
 ];
 
-export default function HowToHelp() {
+export default function ComoAjudar() {
   return (
     <section id="ajudar" className="bg-cyan-50 px-6 py-24">
       <div className="mx-auto max-w-[1120px]">

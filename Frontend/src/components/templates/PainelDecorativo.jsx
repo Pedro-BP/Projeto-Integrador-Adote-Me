@@ -1,4 +1,4 @@
-export default function AuthDecorativePanel() {
+export default function PainelDecorativo() {
   return (
     <div className="relative hidden w-1/2 items-center justify-center overflow-hidden bg-gradient-to-br from-[#1E3D32] via-[#2F5A48] to-[#E3A63D] md:flex">
       <div className="absolute inset-8 flex flex-col justify-end rounded-[28px] bg-[#1C2620]/25 p-8 backdrop-blur-sm">

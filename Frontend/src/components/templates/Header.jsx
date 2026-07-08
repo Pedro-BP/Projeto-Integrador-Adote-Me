@@ -13,13 +13,23 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#1E3D32]/[0.14] bg-[#FAF7EF]/90 backdrop-blur-sm">
       <div className="flex items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]">
+        <a
+          href="#top"
+          className="flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]"
+        >
           Adote-Me
         </a>
 
-        <nav className="hidden gap-8 text-sm font-medium text-[#46564B] md:flex" aria-label="Navegação principal">
+        <nav
+          className="hidden gap-8 text-sm font-medium text-[#46564B] md:flex"
+          aria-label="Navegação principal"
+        >
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="transition-colors hover:text-[#1E3D32]">
+            <a
+              key={link.href}
+              href={link.href}
+              className="transition-colors hover:text-[#1E3D32]"
+            >
               {link.label}
             </a>
           ))}
@@ -38,7 +48,14 @@ export default function Header() {
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
             </svg>
           </button>
@@ -46,7 +63,10 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="flex flex-col gap-1 border-b border-[#1E3D32]/[0.14] px-6 pb-5 md:hidden" aria-label="Navegação móvel">
+        <nav
+          className="flex flex-col gap-1 border-b border-[#1E3D32]/[0.14] px-6 pb-5 md:hidden"
+          aria-label="Navegação móvel"
+        >
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}

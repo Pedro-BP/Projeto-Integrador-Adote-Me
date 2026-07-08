@@ -4,7 +4,7 @@ const STATS = [
   { value: "1", label: "ano de atuação" },
 ];
 
-export default function Stats() {
+export default function Estatisticas() {
   return (
     <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50">
       <div className="mx-auto grid max-w-[1120px] grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-3">

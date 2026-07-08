@@ -4,7 +4,7 @@ const HIGHLIGHTS = [
   "❤️ Adoção consciente",
 ];
 
-export default function About() {
+export default function Sobre() {
   return (
     <section id="sobre" className="px-6 py-24">
       <div className="mx-auto grid max-w-[1120px] gap-10 md:grid-cols-2 md:items-center">

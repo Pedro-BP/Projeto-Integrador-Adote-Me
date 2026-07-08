@@ -1,4 +1,4 @@
-export default function PasswordToggleButton({ visible, onToggle }) {
+export default function BotaoMostrarSenha({ visible, onToggle }) {
   return (
     <button
       type="button"
