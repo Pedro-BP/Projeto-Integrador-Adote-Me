@@ -36,7 +36,7 @@ export default function DestaquePet() {
         </a>
 
         <div className="grid items-center gap-12 md:grid-cols-[1fr_1.1fr]">
-          <div className="relative flex aspect-square items-center justify-center rounded-[28px] bg-gradient-to-br from-[#2F5A48] to-[#1E3D32]">
+          <div className="relative flex aspect-square items-center justify-center rounded-[28px] bg-linear-to-br from-[#2F5A48] to-[#1E3D32]">
             <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.08em] text-cyan-700">
               {PET.status === "disponivel"
                 ? "Disponível para adoção"
@@ -57,7 +57,7 @@ export default function DestaquePet() {
               {PET_FACTS.map((f) => (
                 <span
                   key={f.label}
-                  className="rounded-full bg-[#E7EEE5] px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.05em] text-[#1E3D32]"
+                  className="rounded-full bg-[#E7EEE5] px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-[#1E3D32]"
                 >
                   {f.value}
                 </span>

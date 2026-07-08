@@ -14,13 +14,14 @@ const HELP_CARDS = [
 export default function ComoAjudar() {
   return (
     <section id="ajudar" className="bg-cyan-50 px-6 py-24">
-      <div className="mx-auto max-w-[1120px]">
+      <div className="mx-auto max-w-280">
         <div className="mb-12 max-w-xl">
           <h2 className="mb-3.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem]">
             Como você pode ajudar
           </h2>
           <p className="text-[#46564B]">
-            Existem várias formas de apoiar o trabalho do instituto, escolha a que combina com você.
+            Existem várias formas de apoiar o trabalho do instituto, escolha a
+            que combina com você.
           </p>
         </div>
 
@@ -30,9 +31,14 @@ export default function ComoAjudar() {
               key={c.title}
               className="flex flex-col gap-3.5 rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-7"
             >
-              <h3 className="font-[Fraunces,serif] text-xl text-[#1E3D32]">{c.title}</h3>
-              <p className="flex-grow text-sm text-[#46564B]">{c.text}</p>
-              <a href="#contato" className="text-sm font-semibold text-cyan-600 hover:underline">
+              <h3 className="font-[Fraunces,serif] text-xl text-[#1E3D32]">
+                {c.title}
+              </h3>
+              <p className="grow text-sm text-[#46564B]">{c.text}</p>
+              <a
+                href="#contato"
+                className="text-sm font-semibold text-cyan-600 hover:underline"
+              >
                 {c.cta} →
               </a>
             </div>
