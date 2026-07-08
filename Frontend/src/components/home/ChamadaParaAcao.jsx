@@ -8,21 +8,16 @@ export default function ChamadaParaAcao() {
         Encontre um novo melhor amigo
       </h2>
       <p className="relative mx-auto mb-7 max-w-[46ch] text-white/80">
-        Cada adoção transforma duas vidas: a do animal e a da família que o recebe. Conheça nossos pets disponíveis e ofereça um lar cheio de amor.
+        Cada adoção transforma duas vidas: a do animal e a da família que o
+        recebe. Conheça nossos pets disponíveis e ofereça um lar cheio de amor.
       </p>
       <div className="relative flex flex-wrap justify-center gap-3.5">
         <a
           href="#contato"
           className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-cyan-600 hover:text-white"
         >
-          Adotar agora
-        </a>
-        <a
-          href="#ajudar"
-          className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-600"
-        >
           Ver pets disponíveis
-        </a>
+        </a>{" "}
       </div>
     </div>
   );

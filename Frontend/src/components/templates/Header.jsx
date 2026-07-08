@@ -38,9 +38,9 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <a
             href="#doar"
-            className="hidden rounded-full bg-[#C15A2B] px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#a94a20] sm:inline-flex"
+            className="hidden rounded-full bg-[#C15A2B] text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#a94a20] sm:inline-flex"
           >
-            D
+            {/* inicial do nome do usuario */}
           </a>
           <button
             className="inline-flex rounded-[10px] border border-[#1E3D32]/[0.14] p-2 text-[#1E3D32] md:hidden"
