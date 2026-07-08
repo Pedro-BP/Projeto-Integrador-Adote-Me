@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PasswordToggleButton from "../PasswordToggleButton";
+import PasswordToggleButton from "../templates/PasswordToggleButton";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

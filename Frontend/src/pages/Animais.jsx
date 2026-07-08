@@ -18,8 +18,6 @@ export default function Animais() {
             img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
         }
     ]);
-    
-
     return (
         <div className="bg-[#FAF7EF] min-h-screen font-[Inter,sans-serif]">
             <section className="px-6 pt-16 pb-8">

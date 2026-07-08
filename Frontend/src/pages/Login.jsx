@@ -1,5 +1,5 @@
 import LoginForm from "../components/login/LoginForm";
-import AuthDecorativePanel from "../components/AuthDecorativePanel";
+import AuthDecorativePanel from "../components/templates/AuthDecorativePanel";
 
 export default function Login() {
   return (

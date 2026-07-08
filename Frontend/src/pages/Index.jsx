@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/templates/Header";
+import Footer from "../components/templates/Footer";
 import Hero from "../components/index/Hero";
 import Stats from "../components/index/Stats";
 import About from "../components/index/About";

@@ -1,5 +1,5 @@
 import CadastroForm from "../components/cadastro/CadastroForm";
-import AuthDecorativePanel from "../components/AuthDecorativePanel";
+import AuthDecorativePanel from "../components/templates/AuthDecorativePanel";
 
 export default function Cadastro() {
   return (
