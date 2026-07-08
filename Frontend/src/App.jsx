@@ -1,9 +1,9 @@
-import Feed from "./pages/Feed";
+import CadastrarPet from "./pages/CadastrarPet";
 
 export default function App() {
   return (
     <>
-      <Feed />
+      <CadastrarPet />
     </>
   );
 }
