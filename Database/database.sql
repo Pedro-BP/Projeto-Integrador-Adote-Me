@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
     senha_hash VARCHAR(255) NOT NULL,
     perfil ENUM('admin', 'usuario') NOT NULL DEFAULT 'usuario',
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+);
 
 -- Tabela: pets
 CREATE TABLE pets (
@@ -34,7 +34,7 @@ CREATE TABLE pets (
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_pets_admin
         FOREIGN KEY (admin_id) REFERENCES usuarios(id)
-) ENGINE=InnoDB;
+);
 
 -- Tabela: postagens
 CREATE TABLE postagens (
@@ -49,4 +49,4 @@ CREATE TABLE postagens (
         FOREIGN KEY (pet_id) REFERENCES pets(id),
     CONSTRAINT fk_posts_usuario
         FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-) ENGINE=InnoDB;
+);
