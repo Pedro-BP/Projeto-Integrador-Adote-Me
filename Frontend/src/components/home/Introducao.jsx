@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Introducao() {
   return (
     <section id="top" className="overflow-hidden px-6 pb-24 pt-16 md:pt-20">
@@ -21,12 +23,12 @@ export default function Introducao() {
           </p>
 
           <div className="flex flex-wrap gap-3.5">
-            <a
-              href="#ajudar"
+            <Link
+              to="/animais"
               className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-stone-800"
             >
               Quero adotar
-            </a>
+            </Link>
             <a
               href="#doar"
               className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-stone-800 hover:text-white"

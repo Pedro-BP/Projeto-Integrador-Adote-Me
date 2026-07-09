@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
+
 const HELP_CARDS = [
   {
     title: "Adote",
     text: "Conheça os animais disponíveis e encontre um novo companheiro para a família.",
     cta: "Ver animais para adoção",
+    to: "/animais",
   },
   {
     title: "Entrega voluntaria",
     text: "Não pode mais cuidar do seu pet? Faça uma doação responsável. Nossa ONG ajudará a encontrar um novo lar seguro e cheio de carinho.",
     cta: "Fazer uma doação",
+    href: "#contato",
   },
 ];
 
@@ -35,12 +39,21 @@ export default function ComoAjudar() {
                 {c.title}
               </h3>
               <p className="grow text-sm text-[#46564B]">{c.text}</p>
-              <a
-                href="#contato"
-                className="text-sm font-semibold text-cyan-600 hover:underline"
-              >
-                {c.cta} →
-              </a>
+              {c.to ? (
+                <Link
+                  to={c.to}
+                  className="text-sm font-semibold text-cyan-600 hover:underline"
+                >
+                  {c.cta} →
+                </Link>
+              ) : (
+                <a
+                  href={c.href}
+                  className="text-sm font-semibold text-cyan-600 hover:underline"
+                >
+                  {c.cta} →
+                </a>
+              )}
             </div>
           ))}
         </div>

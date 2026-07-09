@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ChamadaParaAcao() {
   return (
     <div
@@ -12,12 +14,12 @@ export default function ChamadaParaAcao() {
         recebe. Conheça nossos pets disponíveis e ofereça um lar cheio de amor.
       </p>
       <div className="relative flex flex-wrap justify-center gap-3.5">
-        <a
-          href="#contato"
+        <Link
+          to="/animais"
           className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-cyan-600 hover:text-white"
         >
           Ver pets disponíveis
-        </a>{" "}
+        </Link>{" "}
       </div>
     </div>
   );
