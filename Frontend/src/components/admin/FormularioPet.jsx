@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CAMPOS_INICIAIS = {
   nome: "",
@@ -44,12 +45,12 @@ export default function FormularioPet({ petInicial }) {
   return (
     <section className="px-6 pb-20 pt-12 md:pt-16">
       <div className="mx-auto max-w-3xl">
-        <a
-          href="/admin"
+        <Link
+          to="/admin"
           className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
         >
           ← Voltar para o painel
-        </a>
+        </Link>
 
         <div className="rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-8 sm:p-10">
           <span className="font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-cyan-600">

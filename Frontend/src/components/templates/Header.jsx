@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NAV_LINKS = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#ajudar", label: "Como ajudar" },
-  { href: "#resgates", label: "Recém-acolhidos" },
+  { href: "/#sobre", label: "Sobre" },
+  { href: "/#ajudar", label: "Como ajudar" },
+  { href: "/#resgates", label: "Recém-acolhidos" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -13,12 +14,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#1E3D32]/[0.14] bg-[#FAF7EF]/90 backdrop-blur-sm">
       <div className="flex items-center justify-between px-6 py-4">
-        <a
-          href="#top"
-          className="flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]"
-        >
-          Adote-Me
-        </a>
+        <Link to="/">
+          <img
+            src="/logoAdote_me.png"
+            alt="Adote-Me"
+            className="h-11 w-auto"
+          />
+        </Link>
 
         <nav
           className="hidden gap-8 text-sm font-medium text-[#46564B] md:flex"

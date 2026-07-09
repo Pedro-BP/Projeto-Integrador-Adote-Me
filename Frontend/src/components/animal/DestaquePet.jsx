@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PET = {
   nome: "Thor",
   tipo: "Cachorro",
@@ -28,12 +30,12 @@ export default function DestaquePet() {
   return (
     <section id="top" className="overflow-hidden px-6 pb-20 pt-12 md:pt-16">
       <div className="mx-auto max-w-280">
-        <a
-          href="/"
+        <Link
+          to="/animais"
           className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
         >
           ← Voltar para adoção
-        </a>
+        </Link>
 
         <div className="grid items-center gap-12 md:grid-cols-[1fr_1.1fr]">
           <div className="relative flex aspect-square items-center justify-center rounded-[28px] bg-linear-to-br from-[#2F5A48] to-[#1E3D32]">

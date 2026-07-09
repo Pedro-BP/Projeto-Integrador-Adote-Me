@@ -21,7 +21,7 @@ export default function Footer() {
           <ul className="grid gap-2.5">
             <li>
               <a
-                href="#sobre"
+                href="/#sobre"
                 className="text-sm text-[#46564B] hover:text-[#1E3D32]"
               >
                 Sobre
@@ -29,7 +29,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="#resgates"
+                href="/#resgates"
                 className="text-sm text-[#46564B] hover:text-[#1E3D32]"
               >
                 Recém-acolhidos
@@ -37,7 +37,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="#ajudar"
+                href="/#ajudar"
                 className="text-sm text-[#46564B] hover:text-[#1E3D32]"
               >
                 Como ajudar

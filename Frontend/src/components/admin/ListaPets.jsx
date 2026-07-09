@@ -1,66 +1,6 @@
 import { useState } from "react";
 import LinhaPet from "./LinhaPet";
-
-const FOTO_MOCK =
-  "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*";
-
-const PETS_INICIAIS = [
-  {
-    id: 1,
-    nome: "Thor",
-    tipo: "Cachorro",
-    porte: "Médio",
-    idade: "2 anos",
-    cidade: "Tramandaí",
-    bairro: "Centro",
-    fotoUrl: FOTO_MOCK,
-    status: "disponivel",
-  },
-  {
-    id: 2,
-    nome: "Mel",
-    tipo: "Cachorro",
-    porte: "Pequeno",
-    idade: "1 ano",
-    cidade: "Tramandaí",
-    bairro: "Zona Nova",
-    fotoUrl: FOTO_MOCK,
-    status: "adotado",
-  },
-  {
-    id: 3,
-    nome: "Pandora",
-    tipo: "Gato",
-    porte: "Pequeno",
-    idade: "8 meses",
-    cidade: "Tramandaí",
-    bairro: "Centro",
-    fotoUrl: FOTO_MOCK,
-    status: "disponivel",
-  },
-  {
-    id: 4,
-    nome: "Bento",
-    tipo: "Gato",
-    porte: "Médio",
-    idade: "3 anos",
-    cidade: "Tramandaí",
-    bairro: "Vila Nova",
-    fotoUrl: FOTO_MOCK,
-    status: "adotado",
-  },
-  {
-    id: 5,
-    nome: "Pudim",
-    tipo: "Cachorro",
-    porte: "Grande",
-    idade: "4 anos",
-    cidade: "Tramandaí",
-    bairro: "Centro",
-    fotoUrl: FOTO_MOCK,
-    status: "disponivel",
-  },
-];
+import { PETS_INICIAIS } from "./petsMock";
 
 const COLUNAS = [
   "Pet",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import BotaoMostrarSenha from "../templates/BotaoMostrarSenha";
 
 export default function FormularioCadastro() {
@@ -31,12 +32,12 @@ export default function FormularioCadastro() {
   return (
     <div className="flex w-full flex-col justify-center px-6 py-12 sm:px-12 md:w-1/2 lg:px-20">
       <div className="mx-auto w-full max-w-sm">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="mb-10 inline-flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]"
         >
           Adote-Me
-        </a>
+        </Link>
 
         <h1 className="mb-2 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl">
           Crie sua conta
@@ -133,9 +134,9 @@ export default function FormularioCadastro() {
 
         <p className="mt-8 text-center text-sm text-[#46564B]">
           Já tem conta?{" "}
-          <a href="/login" className="font-semibold text-cyan-600 hover:underline">
+          <Link to="/login" className="font-semibold text-cyan-600 hover:underline">
             Entrar
-          </a>
+          </Link>
         </p>
       </div>
     </div>

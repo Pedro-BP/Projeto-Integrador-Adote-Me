@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Introducao() {
   return (
     <section className="px-6 pt-16 pb-8">
@@ -17,12 +19,12 @@ export default function Introducao() {
           </p>
         </div>
 
-        <a
-          href="/admin/cadastrar-pet"
+        <Link
+          to="/admin/cadastrar-pet"
           className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-stone-800"
         >
           + Cadastrar pet
-        </a>
+        </Link>
       </div>
     </section>
   );

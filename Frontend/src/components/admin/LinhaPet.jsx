@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { TIPO_LABEL, PORTE_LABEL } from "./petsMock";
+
 export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
   const disponivel = pet.status === "disponivel";
 
@@ -15,8 +18,12 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
           </span>
         </div>
       </td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">{pet.tipo}</td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">{pet.porte}</td>
+      <td className="px-6 py-4 text-sm text-[#46564B]">
+        {TIPO_LABEL[pet.tipo]}
+      </td>
+      <td className="px-6 py-4 text-sm text-[#46564B]">
+        {PORTE_LABEL[pet.porte]}
+      </td>
       <td className="px-6 py-4 text-sm text-[#46564B]">{pet.idade}</td>
       <td className="px-6 py-4 text-sm text-[#46564B]">
         {pet.bairro}, {pet.cidade}
@@ -34,12 +41,12 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
       </td>
       <td className="px-6 py-4">
         <div className="flex flex-wrap items-center gap-2.5">
-          <a
-            href={`/admin/pets/${pet.id}/editar`}
+          <Link
+            to={`/admin/pets/${pet.id}/editar`}
             className="rounded-full border border-[#1E3D32] px-4 py-1.5 text-xs font-semibold text-[#1E3D32] transition hover:bg-[#1E3D32] hover:text-white"
           >
             Editar
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => onAlternarStatus(pet.id)}

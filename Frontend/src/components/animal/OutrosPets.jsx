@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const OTHER_PETS = [
   {
     name: "Pandora",
@@ -31,9 +33,9 @@ export default function OutrosPets() {
 
         <div className="grid gap-6 sm:grid-cols-3">
           {OTHER_PETS.map((p) => (
-            <a
+            <Link
               key={p.name}
-              href="#"
+              to="/animais"
               className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white transition-transform hover:-translate-y-1"
             >
               <div className="flex aspect-16/11 items-center justify-center bg-linear-to-br from-[#2F5A48] to-[#1E3D32]" />
@@ -48,7 +50,7 @@ export default function OutrosPets() {
                 </div>
                 <p className="text-sm text-[#46564B]">{p.text}</p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
