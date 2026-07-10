@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BotaoMostrarSenha from "../templates/BotaoMostrarSenha";
+import { login } from "../../services/api";
+import { salvarSessao } from "../../services/sessao";
 
 export default function FormularioLogin() {
   const [email, setEmail] = useState("");
@@ -9,8 +11,9 @@ export default function FormularioLogin() {
   const [lembrar, setLembrar] = useState(false);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setErro("");
 
@@ -20,7 +23,15 @@ export default function FormularioLogin() {
     }
 
     setCarregando(true);
-    setTimeout(() => setCarregando(false), 900);
+    try {
+      const dados = await login({ email, senha });
+      salvarSessao(dados);
+      navigate("/");
+    } catch (err) {
+      setErro(err.message);
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
