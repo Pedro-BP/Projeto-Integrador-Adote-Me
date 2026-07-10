@@ -56,7 +56,47 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 
 ## Estrutura de pastas
 
-> Seção em construção — a árvore de diretórios do repositório será adicionada aqui em breve.
+```
+Projeto-Integrador-Adote-Me/
+├── Backend/
+│   ├── public/
+│   │   └── index.php          # bootstrap do Slim (dotenv, CORS, error middleware, carrega as rotas)
+│   ├── src/
+│   │   ├── routes.php         # definição de todas as rotas da API
+│   │   ├── Controllers/       # UsuarioController, PetController, PostagemController
+│   │   ├── Models/            # Usuario, Pet, Postagem (queries via PDO)
+│   │   ├── Middlewares/
+│   │   │   └── AuthMiddleware.php   # valida o JWT e o perfil (admin/usuario)
+│   │   └── Database/
+│   │       └── Connection.php       # conexão PDO com o MySQL
+│   ├── .env                   # variáveis de ambiente (não versionado)
+│   ├── .env.example
+│   └── composer.json
+├── Frontend/
+│   ├── public/
+│   │   └── logoAdote_me.png
+│   └── src/
+│       ├── main.jsx            # monta <BrowserRouter><App /></BrowserRouter>
+│       ├── App.jsx             # define as rotas e as proteções RotaAdmin/RotaLogada
+│       ├── components/
+│       │   ├── templates/      # Header, Footer, PainelDecorativo, BotaoMostrarSenha
+│       │   ├── home/           # seções da Home
+│       │   ├── animais/        # listagem/vitrine de pets
+│       │   ├── animal/         # detalhe de um pet
+│       │   ├── feed/           # feed de postagens pós-adoção
+│       │   ├── admin/          # painel administrativo (CRUD de pets)
+│       │   ├── login/          # formulário de login
+│       │   └── cadastro/       # formulário de cadastro
+│       ├── pages/              # uma página por rota (Home, Login, Animais, Admin, ...)
+│       ├── services/
+│       │   ├── api.js          # cliente fetch da API
+│       │   └── sessao.js       # sessão (JWT + usuário) no localStorage
+│       └── constants/
+│           └── pets.js         # labels e imagem placeholder compartilhados
+├── Database/
+│   └── database.sql            # schema completo do banco
+└── README.md
+```
 
 ## Estrutura do banco de dados
 
@@ -114,11 +154,75 @@ O script completo de criação do banco está em [`database.sql`](./database.sql
 
 ## Endpoints da API
 
-> Seção em construção — a documentação das rotas (endpoints) da API será adicionada aqui em breve.
+URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Authorization: Bearer <token>`, obtido em `POST /login`.
+
+| Método | Rota                     | Acesso                | Descrição                                                             |
+| ------ | ------------------------ | ---------------------- | ----------------------------------------------------------------------- |
+| POST   | `/usuarios`               | Público                | Cadastra um usuário. `perfil` nunca vem do corpo — todo cadastro público é forçado a `usuario` |
+| POST   | `/login`                  | Público                | Autentica com e-mail/senha e retorna `{ token, usuario }`               |
+| GET    | `/usuarios`                | Logado (`admin`)      | Lista todos os usuários (sem `senha_hash`)                              |
+| GET    | `/pets`                    | Público                | Lista pets. Aceita filtros por query string: `?tipo=` e `?porte=`       |
+| GET    | `/pets/{id}`               | Público                | Detalhe de um pet                                                        |
+| POST   | `/pets`                    | Logado (`admin`)      | Cadastra um pet                                                         |
+| PUT    | `/pets/{id}`               | Logado (`admin`)      | Atualiza um pet (só os campos enviados são alterados)                   |
+| DELETE | `/pets/{id}`               | Logado (`admin`)      | Remove um pet (falha com 409 se houver postagens vinculadas)            |
+| GET    | `/postagens`               | Público                | Lista postagens, com `pet_nome`/`usuario_nome` já resolvidos via JOIN   |
+| GET    | `/postagens/{id}`          | Público                | Detalhe de uma postagem                                                 |
+| POST   | `/postagens`               | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto_url`, `relato`)         |
+| POST   | `/postagens/{id}/curtir`   | Público                | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")   |
+
+Respostas de erro seguem o formato `{ "erro": "mensagem" }`, com o status HTTP correspondente (`401` sem token, `403` perfil sem permissão, `404` não encontrado, `409` conflito, `422` validação).
+
+Uma coleção pronta pra importar no [Insomnia](https://insomnia.rest/) com todas as rotas acima está em [`insomnia-collection.json`](./insomnia-collection.json) (File → Import → From File).
 
 ## Como rodar o projeto
 
-> Seção em construção — assim que o setup do frontend/backend estiver definido, adicionaremos aqui os comandos de instalação e execução , configuração do XAMPP/MySQL, variáveis de ambiente, etc.
+Pré-requisitos: PHP 8.1+ com a extensão `pdo_mysql`, [Composer](https://getcomposer.org/), Node.js 18+ e um MySQL/MariaDB local (ex.: via [XAMPP](https://www.apachefriends.org/)).
+
+### 1. Banco de dados
+
+Crie um banco chamado `adote_me` e importe o schema:
+
+```bash
+mysql -u root -e "CREATE DATABASE adote_me CHARACTER SET utf8mb4;"
+mysql -u root adote_me < Database/database.sql
+```
+
+### 2. Backend
+
+```bash
+cd Backend
+composer install
+cp .env.example .env
+```
+
+Preencha o `.env` com os dados do seu MySQL local (`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`) e defina um `JWT_KEY` (qualquer string secreta). Depois suba o servidor:
+
+```bash
+php -S localhost:8000 -t public
+```
+
+A API fica disponível em `http://localhost:8000`.
+
+### 3. Frontend
+
+```bash
+cd Frontend
+npm install
+npm run dev
+```
+
+O site fica disponível em `http://localhost:5173` (a URL da API está fixa em `Frontend/src/services/api.js`, apontando para `http://localhost:8000`).
+
+### 4. Criar um usuário admin
+
+Não existe cadastro de admin pela interface (por design — evita auto-promoção). Cadastre uma conta normal pelo site e promova-a via SQL:
+
+```sql
+UPDATE usuarios SET perfil = 'admin' WHERE email = 'seu@email.com';
+```
+
+Faça login novamente após a promoção para receber um token com o novo perfil.
 
 ## Padrão de commits
 
