@@ -161,7 +161,7 @@ URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Autho
 | POST   | `/usuarios`               | Público                | Cadastra um usuário. `perfil` nunca vem do corpo — todo cadastro público é forçado a `usuario` |
 | POST   | `/login`                  | Público                | Autentica com e-mail/senha e retorna `{ token, usuario }`               |
 | GET    | `/usuarios`                | Logado (`admin`)      | Lista todos os usuários (sem `senha_hash`)                              |
-| GET    | `/pets`                    | Público                | Lista pets. Aceita filtros por query string: `?tipo=` e `?porte=`       |
+| GET    | `/pets`                    | Público                | Lista pets. Aceita filtros por query string: `?tipo=`, `?porte=` e `?status=` |
 | GET    | `/pets/{id}`               | Público                | Detalhe de um pet                                                        |
 | POST   | `/pets`                    | Logado (`admin`)      | Cadastra um pet                                                         |
 | PUT    | `/pets/{id}`               | Logado (`admin`)      | Atualiza um pet (só os campos enviados são alterados)                   |
@@ -172,8 +172,6 @@ URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Autho
 | POST   | `/postagens/{id}/curtir`   | Público                | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")   |
 
 Respostas de erro seguem o formato `{ "erro": "mensagem" }`, com o status HTTP correspondente (`401` sem token, `403` perfil sem permissão, `404` não encontrado, `409` conflito, `422` validação).
-
-Uma coleção pronta pra importar no [Insomnia](https://insomnia.rest/) com todas as rotas acima está em [`insomnia-collection.json`](./insomnia-collection.json) (File → Import → From File).
 
 ## Como rodar o projeto
 

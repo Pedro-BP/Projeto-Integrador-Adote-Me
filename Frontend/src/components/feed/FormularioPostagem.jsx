@@ -13,8 +13,8 @@ export default function FormularioPostagem() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    listarPets()
-      .then((todos) => setPets(todos.filter((p) => p.status === "adotado")))
+    listarPets({ status: "adotado" })
+      .then(setPets)
       .catch(() => setPets([]))
       .finally(() => setCarregandoPets(false));
   }, []);
