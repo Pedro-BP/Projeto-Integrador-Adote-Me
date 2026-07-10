@@ -10,7 +10,6 @@ export default function Introducao() {
           Animais disponíveis
         </h1>
       </div>
-      {/* add pesquisa e filtro mais tarde */}
     </section>
   );
 }

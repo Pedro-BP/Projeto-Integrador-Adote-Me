@@ -15,8 +15,9 @@ class PetController
     {
         $filtros = $request->getQueryParams();
         $pets = Pet::all([
-            'tipo'  => $filtros['tipo']  ?? null,
-            'porte' => $filtros['porte'] ?? null,
+            'tipo'   => $filtros['tipo']   ?? null,
+            'porte'  => $filtros['porte']  ?? null,
+            'status' => $filtros['status'] ?? null,
         ]);
         $response->getBody()->write(json_encode($pets));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');

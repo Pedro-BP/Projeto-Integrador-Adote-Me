@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import LinhaPet from "./LinhaPet";
 import { listarPets, atualizarPet, excluirPet } from "../../services/api";
+import { TIPO_LABEL, PORTE_LABEL } from "../../constants/pets";
 
 const COLUNAS = [
   "Pet",
@@ -16,13 +17,17 @@ export default function ListaPets() {
   const [pets, setPets] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [porte, setPorte] = useState("");
 
   useEffect(() => {
-    listarPets()
+    setCarregando(true);
+    setErro("");
+    listarPets({ tipo, porte })
       .then(setPets)
       .catch((err) => setErro(err.message))
       .finally(() => setCarregando(false));
-  }, []);
+  }, [tipo, porte]);
 
   async function alternarStatus(id) {
     const pet = pets.find((p) => p.id === id);
@@ -49,6 +54,36 @@ export default function ListaPets() {
 
   return (
     <section className="px-6 pb-20">
+      <div className="mx-auto mb-6 flex max-w-280 flex-wrap gap-3.5">
+        <select
+          value={tipo}
+          onChange={(e) => setTipo(e.target.value)}
+          aria-label="Filtrar por tipo"
+          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+        >
+          <option value="">Todos os tipos</option>
+          {Object.entries(TIPO_LABEL).map(([valor, rotulo]) => (
+            <option key={valor} value={valor}>
+              {rotulo}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={porte}
+          onChange={(e) => setPorte(e.target.value)}
+          aria-label="Filtrar por porte"
+          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+        >
+          <option value="">Todos os portes</option>
+          {Object.entries(PORTE_LABEL).map(([valor, rotulo]) => (
+            <option key={valor} value={valor}>
+              {rotulo}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="mx-auto max-w-280 overflow-x-auto rounded-[20px] border border-[#1E3D32]/[0.14] bg-white">
         {carregando && (
           <p className="px-6 py-10 text-center text-sm text-[#46564B]">
@@ -91,7 +126,9 @@ export default function ListaPets() {
 
             {pets.length === 0 && (
               <p className="px-6 py-10 text-center text-sm text-[#46564B]">
-                Nenhum pet cadastrado no momento.
+                {tipo || porte
+                  ? "Nenhum pet cadastrado com esse filtro."
+                  : "Nenhum pet cadastrado no momento."}
               </p>
             )}
           </>

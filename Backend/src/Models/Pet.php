@@ -19,6 +19,10 @@ class Pet
             $sql .= " AND porte = :porte";
             $params['porte'] = $filtros['porte'];
         }
+        if (!empty($filtros['status'])) {
+            $sql .= " AND status = :status";
+            $params['status'] = $filtros['status'];
+        }
         $sql .= " ORDER BY criado_em DESC";
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
