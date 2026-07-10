@@ -1,34 +1,60 @@
 import { useState } from "react";
+import { curtirPostagem } from "../../services/api";
+import { FOTO_PLACEHOLDER } from "../../constants/pets";
+
+function formatarTempoRelativo(dataSql) {
+  const data = new Date(dataSql.replace(" ", "T"));
+  const diffHoras = Math.floor((Date.now() - data.getTime()) / (1000 * 60 * 60));
+
+  if (diffHoras < 1) return "agora mesmo";
+  if (diffHoras < 24) return `há ${diffHoras} hora${diffHoras === 1 ? "" : "s"}`;
+
+  const diffDias = Math.floor(diffHoras / 24);
+  if (diffDias < 30) return `há ${diffDias} dia${diffDias === 1 ? "" : "s"}`;
+
+  const diffMeses = Math.floor(diffDias / 30);
+  return `há ${diffMeses} mês${diffMeses === 1 ? "" : "es"}`;
+}
 
 export default function CardPostagem({ postagem }) {
   const [curtido, setCurtido] = useState(false);
-  const [curtidas, setCurtidas] = useState(postagem.curtidas);
+  const [curtidas, setCurtidas] = useState(Number(postagem.curtidas));
+  const [carregando, setCarregando] = useState(false);
 
-  function handleCurtir() {
-    setCurtidas((c) => (curtido ? c - 1 : c + 1));
-    setCurtido((v) => !v);
+  async function handleCurtir() {
+    if (curtido || carregando) return;
+    setCarregando(true);
+    try {
+      await curtirPostagem(postagem.id);
+      setCurtidas((c) => c + 1);
+      setCurtido(true);
+    } catch {
+      // curtida é best-effort; sem feedback de erro pra não travar a UX
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
     <div className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
       <img
-        src={postagem.fotoUrl}
-        alt={`${postagem.petNome} com a nova família`}
+        src={postagem.foto_url || FOTO_PLACEHOLDER}
+        alt={`${postagem.pet_nome} com a nova família`}
         className="h-64 w-full object-cover"
       />
 
       <div className="p-6">
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 className="font-[Fraunces,serif] text-2xl font-bold text-[#1E3D32]">
-            {postagem.petNome}
+            {postagem.pet_nome}
           </h2>
           <span className="shrink-0 rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider text-[#1E3D32]">
-            {postagem.criadoEm}
+            {formatarTempoRelativo(postagem.criado_em)}
           </span>
         </div>
 
         <p className="mb-2 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-cyan-600">
-          Adotado(a) por {postagem.autorNome}
+          Adotado(a) por {postagem.usuario_nome}
         </p>
 
         <p className="mb-6 text-[#46564B]">{postagem.relato}</p>
@@ -36,8 +62,9 @@ export default function CardPostagem({ postagem }) {
         <button
           type="button"
           onClick={handleCurtir}
+          disabled={curtido || carregando}
           aria-pressed={curtido}
-          className={`flex w-full items-center justify-center gap-2 rounded-full border py-3 font-semibold transition ${
+          className={`flex w-full items-center justify-center gap-2 rounded-full border py-3 font-semibold transition disabled:cursor-default ${
             curtido
               ? "border-[#C15A2B] bg-[#C15A2B] text-white"
               : "border-[#1E3D32] text-[#1E3D32] hover:bg-[#1E3D32] hover:text-white"

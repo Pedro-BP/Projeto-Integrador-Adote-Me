@@ -73,3 +73,15 @@ export function excluirPet(id) {
     headers: authHeaders(),
   });
 }
+
+export function listarPostagens(filtros = {}) {
+  const params = new URLSearchParams(
+    Object.fromEntries(Object.entries(filtros).filter(([, v]) => v)),
+  );
+  const query = params.toString() ? `?${params}` : "";
+  return request(`/postagens${query}`);
+}
+
+export function curtirPostagem(id) {
+  return request(`/postagens/${id}/curtir`, { method: "POST" });
+}

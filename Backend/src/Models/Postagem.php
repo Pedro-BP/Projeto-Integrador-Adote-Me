@@ -6,16 +6,22 @@ use Ramsey\Uuid\Uuid;
 
 class Postagem
 {
+    private const SELECT_COM_JOIN =
+        "SELECT postagens.*, pets.nome AS pet_nome, usuarios.nome AS usuario_nome
+         FROM postagens
+         JOIN pets ON pets.id = postagens.pet_id
+         JOIN usuarios ON usuarios.id = postagens.usuario_id";
+
     public static function all(array $filtros = [])
     {
         $db = Connection::get();
-        $sql = "SELECT * FROM postagens WHERE 1=1";
+        $sql = self::SELECT_COM_JOIN . " WHERE 1=1";
         $params = [];
         if (!empty($filtros['pet_id'])) {
-            $sql .= " AND pet_id = :pet_id";
+            $sql .= " AND postagens.pet_id = :pet_id";
             $params['pet_id'] = $filtros['pet_id'];
         }
-        $sql .= " ORDER BY criado_em DESC";
+        $sql .= " ORDER BY postagens.criado_em DESC";
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +30,7 @@ class Postagem
     public static function findById($id)
     {
         $db = Connection::get();
-        $stmt = $db->prepare("SELECT * FROM postagens WHERE id = :id");
+        $stmt = $db->prepare(self::SELECT_COM_JOIN . " WHERE postagens.id = :id");
         $stmt->execute(['id' => $id]);
         $postagem = $stmt->fetch(PDO::FETCH_ASSOC);
         return $postagem ?: null;
