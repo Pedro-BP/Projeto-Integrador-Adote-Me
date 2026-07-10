@@ -5,6 +5,7 @@ import Cadastro from "./pages/Cadastro";
 import Animais from "./pages/Animais";
 import Animal from "./pages/Animal";
 import Feed from "./pages/Feed";
+import CriarPostagem from "./pages/CriarPostagem";
 import Admin from "./pages/Admin";
 import CadastrarPet from "./pages/CadastrarPet";
 import NaoEncontrada from "./pages/NaoEncontrada";
@@ -13,6 +14,14 @@ import { obterSessao } from "./services/sessao";
 function RotaAdmin({ children }) {
   const sessao = obterSessao();
   if (sessao?.usuario.perfil !== "admin") {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
+function RotaLogada({ children }) {
+  const sessao = obterSessao();
+  if (!sessao) {
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -27,6 +36,14 @@ export default function App() {
       <Route path="/animais" element={<Animais />} />
       <Route path="/animais/:id" element={<Animal />} />
       <Route path="/feed" element={<Feed />} />
+      <Route
+        path="/feed/nova-postagem"
+        element={
+          <RotaLogada>
+            <CriarPostagem />
+          </RotaLogada>
+        }
+      />
       <Route
         path="/admin"
         element={

@@ -85,3 +85,11 @@ export function listarPostagens(filtros = {}) {
 export function curtirPostagem(id) {
   return request(`/postagens/${id}/curtir`, { method: "POST" });
 }
+
+export function criarPostagem(dados) {
+  return request("/postagens", {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(dados),
+  });
+}
