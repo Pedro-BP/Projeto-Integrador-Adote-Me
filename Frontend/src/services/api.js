@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const API_URL = "http://localhost:8000";
 
 async function request(path, options = {}) {
   const response = await fetch(`${API_URL}${path}`, {
@@ -30,4 +30,16 @@ export function cadastrar({ nome, email, senha }) {
     method: "POST",
     body: JSON.stringify({ nome, email, senha }),
   });
+}
+
+export function listarPets(filtros = {}) {
+  const params = new URLSearchParams(
+    Object.fromEntries(Object.entries(filtros).filter(([, v]) => v)),
+  );
+  const query = params.toString() ? `?${params}` : "";
+  return request(`/pets${query}`);
+}
+
+export function buscarPet(id) {
+  return request(`/pets/${id}`);
 }

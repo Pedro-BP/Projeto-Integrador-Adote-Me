@@ -1,24 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { listarPets } from "../../services/api";
 
-const OTHER_PETS = [
-  {
-    name: "Pandora",
-    status: "Disponível",
-    text: "Filhote sociável, já vacinada, esperando por um lar.",
-  },
-  {
-    name: "Bento",
-    status: "Disponível",
-    text: "Gato tranquilo, adora colo e ambientes calmos.",
-  },
-  {
-    name: "Luna",
-    status: "Disponível",
-    text: "Cadela dócil, ótima com crianças e outros pets.",
-  },
-];
+export default function OutrosPets({ petAtualId }) {
+  const [pets, setPets] = useState([]);
 
-export default function OutrosPets() {
+  useEffect(() => {
+    listarPets()
+      .then((todos) =>
+        setPets(todos.filter((p) => p.id !== petAtualId).slice(0, 3)),
+      )
+      .catch(() => setPets([]));
+  }, [petAtualId]);
+
+  if (pets.length === 0) {
+    return null;
+  }
+
   return (
     <section className="px-6 py-20">
       <div className="mx-auto max-w-280">
@@ -32,23 +30,33 @@ export default function OutrosPets() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-3">
-          {OTHER_PETS.map((p) => (
+          {pets.map((p) => (
             <Link
-              key={p.name}
-              to="/animais"
+              key={p.id}
+              to={`/animais/${p.id}`}
               className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white transition-transform hover:-translate-y-1"
             >
-              <div className="flex aspect-16/11 items-center justify-center bg-linear-to-br from-[#2F5A48] to-[#1E3D32]" />
+              <div className="flex aspect-16/11 items-center justify-center overflow-hidden bg-linear-to-br from-[#2F5A48] to-[#1E3D32]">
+                {p.foto_url && (
+                  <img
+                    src={p.foto_url}
+                    alt={p.nome}
+                    className="h-full w-full object-cover"
+                  />
+                )}
+              </div>
               <div className="p-5">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="font-[Fraunces,serif] text-lg font-bold text-[#1E3D32]">
-                    {p.name}
+                    {p.nome}
                   </span>
                   <span className="rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider text-[#1E3D32]">
-                    {p.status}
+                    {p.status === "disponivel" ? "Disponível" : "Adotado"}
                   </span>
                 </div>
-                <p className="text-sm text-[#46564B]">{p.text}</p>
+                <p className="text-sm text-[#46564B]">
+                  {p.historia ? `${p.historia.split(".")[0]}.` : ""}
+                </p>
               </div>
             </Link>
           ))}
