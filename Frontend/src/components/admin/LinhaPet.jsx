@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TIPO_LABEL, PORTE_LABEL } from "./petsMock";
+import { TIPO_LABEL, PORTE_LABEL, FOTO_PLACEHOLDER } from "../../constants/pets";
 
 export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
   const disponivel = pet.status === "disponivel";
@@ -9,7 +9,7 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <img
-            src={pet.fotoUrl}
+            src={pet.foto_url || FOTO_PLACEHOLDER}
             alt={pet.nome}
             className="h-12 w-12 rounded-full object-cover"
           />

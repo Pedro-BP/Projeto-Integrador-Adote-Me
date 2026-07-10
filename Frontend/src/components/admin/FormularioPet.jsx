@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { criarPet, atualizarPet } from "../../services/api";
 
 const CAMPOS_INICIAIS = {
   nome: "",
@@ -8,7 +9,7 @@ const CAMPOS_INICIAIS = {
   idade: "",
   cidade: "",
   bairro: "",
-  fotoUrl: "",
+  foto_url: "",
   historia: "",
   numero: "",
   email: "",
@@ -16,18 +17,22 @@ const CAMPOS_INICIAIS = {
 
 export default function FormularioPet({ petInicial }) {
   const modoEdicao = Boolean(petInicial);
-  const [campos, setCampos] = useState({
+  const [campos, setCampos] = useState(() => ({
     ...CAMPOS_INICIAIS,
-    ...petInicial,
-  });
+    ...(petInicial &&
+      Object.fromEntries(
+        Object.entries(petInicial).filter(([, v]) => v !== null && v !== undefined),
+      )),
+  }));
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const navigate = useNavigate();
 
   function atualizarCampo(campo) {
     return (e) => setCampos((atual) => ({ ...atual, [campo]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setErro("");
 
@@ -38,8 +43,32 @@ export default function FormularioPet({ petInicial }) {
       return;
     }
 
+    const dados = {
+      nome: campos.nome,
+      tipo: campos.tipo,
+      porte: campos.porte,
+      idade: campos.idade,
+      cidade: campos.cidade,
+      bairro: campos.bairro,
+      foto_url: campos.foto_url,
+      historia: campos.historia,
+      numero: campos.numero,
+      email: campos.email,
+    };
+
     setCarregando(true);
-    setTimeout(() => setCarregando(false), 900);
+    try {
+      if (modoEdicao) {
+        await atualizarPet(petInicial.id, dados);
+      } else {
+        await criarPet(dados);
+      }
+      navigate("/admin");
+    } catch (err) {
+      setErro(err.message);
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
@@ -186,16 +215,16 @@ export default function FormularioPet({ petInicial }) {
 
             <div>
               <label
-                htmlFor="fotoUrl"
+                htmlFor="foto_url"
                 className="mb-1.5 block text-sm font-medium text-[#1C2620]"
               >
                 URL da foto
               </label>
               <input
-                id="fotoUrl"
+                id="foto_url"
                 type="url"
-                value={campos.fotoUrl}
-                onChange={atualizarCampo("fotoUrl")}
+                value={campos.foto_url}
+                onChange={atualizarCampo("foto_url")}
                 placeholder="https://..."
                 className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
               />

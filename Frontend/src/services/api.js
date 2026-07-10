@@ -1,3 +1,5 @@
+import { obterSessao } from "./sessao";
+
 const API_URL = "http://localhost:8000";
 
 async function request(path, options = {}) {
@@ -16,6 +18,11 @@ async function request(path, options = {}) {
   }
 
   return dados;
+}
+
+function authHeaders() {
+  const token = obterSessao()?.token;
+  return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 export function login({ email, senha }) {
@@ -42,4 +49,27 @@ export function listarPets(filtros = {}) {
 
 export function buscarPet(id) {
   return request(`/pets/${id}`);
+}
+
+export function criarPet(dados) {
+  return request("/pets", {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(dados),
+  });
+}
+
+export function atualizarPet(id, dados) {
+  return request(`/pets/${id}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify(dados),
+  });
+}
+
+export function excluirPet(id) {
+  return request(`/pets/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
 }
