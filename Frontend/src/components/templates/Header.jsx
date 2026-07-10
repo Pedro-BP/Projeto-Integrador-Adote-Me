@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { obterSessao, limparSessao } from "../../services/sessao";
 
 const NAV_LINKS = [
   { href: "/#sobre", label: "Sobre" },
@@ -10,6 +11,14 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [sessao, setSessao] = useState(() => obterSessao());
+  const navigate = useNavigate();
+
+  function handleSair() {
+    limparSessao();
+    setSessao(null);
+    navigate("/");
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#1E3D32]/[0.14] bg-[#FAF7EF]/90 backdrop-blur-sm">
@@ -35,15 +44,41 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          {sessao?.usuario.perfil === "admin" && (
+            <Link
+              to="/admin"
+              className="transition-colors hover:text-[#1E3D32]"
+            >
+              Painel
+            </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href="#doar"
-            className="hidden rounded-full bg-[#C15A2B] text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#a94a20] sm:inline-flex"
-          >
-            {/* inicial do nome do usuario */}
-          </a>
+          {sessao ? (
+            <div className="hidden items-center gap-3 sm:flex">
+              <span
+                title={sessao.usuario.nome}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-600 text-sm font-semibold text-white"
+              >
+                {sessao.usuario.nome.charAt(0).toUpperCase()}
+              </span>
+              <button
+                type="button"
+                onClick={handleSair}
+                className="text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
+              >
+                Sair
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="hidden rounded-full bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-stone-800 sm:inline-flex"
+            >
+              Entrar
+            </Link>
+          )}
           <button
             className="inline-flex rounded-[10px] border border-[#1E3D32]/[0.14] p-2 text-[#1E3D32] md:hidden"
             aria-label="Abrir menu"
@@ -79,6 +114,35 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          {sessao?.usuario.perfil === "admin" && (
+            <Link
+              to="/admin"
+              onClick={() => setMenuOpen(false)}
+              className="border-b border-[#1E3D32]/[0.14] py-2.5 font-medium text-[#46564B]"
+            >
+              Painel
+            </Link>
+          )}
+          {sessao ? (
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                handleSair();
+              }}
+              className="py-2.5 text-left font-medium text-[#46564B]"
+            >
+              Sair ({sessao.usuario.nome})
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              className="py-2.5 font-medium text-[#46564B]"
+            >
+              Entrar
+            </Link>
+          )}
         </nav>
       )}
     </header>
