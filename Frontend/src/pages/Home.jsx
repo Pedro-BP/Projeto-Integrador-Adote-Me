@@ -5,7 +5,6 @@ import Estatisticas from "../components/home/Estatisticas";
 import Sobre from "../components/home/Sobre";
 import ComoAjudar from "../components/home/ComoAjudar";
 import ResgatesRecentes from "../components/home/ResgatesRecentes";
-import ChamadaParaAcao from "../components/home/ChamadaParaAcao";
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
       <Sobre />
       <ComoAjudar />
       <ResgatesRecentes />
-      <ChamadaParaAcao />
       <Footer />
     </div>
   );

@@ -29,12 +29,6 @@ export default function Introducao() {
             >
               Quero adotar
             </Link>
-            <a
-              href="#doar"
-              className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-stone-800 hover:text-white"
-            >
-              Fazer uma doação
-            </a>
           </div>
         </div>
 
