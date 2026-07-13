@@ -11,12 +11,29 @@ export default function Vitrine() {
   const [porte, setPorte] = useState("");
 
   useEffect(() => {
-    setCarregando(true);
-    setErro("");
-    listarPets({ status: "disponivel", tipo, porte })
-      .then(setPets)
-      .catch((err) => setErro(err.message))
-      .finally(() => setCarregando(false));
+    let cancelado = false;
+
+    async function carregarPets() {
+      setCarregando(true);
+      setErro("");
+      try {
+        const resultado = await listarPets({
+          status: "disponivel",
+          tipo,
+          porte,
+        });
+        if (!cancelado) setPets(resultado);
+      } catch (err) {
+        if (!cancelado) setErro(err.message);
+      } finally {
+        if (!cancelado) setCarregando(false);
+      }
+    }
+
+    carregarPets();
+    return () => {
+      cancelado = true;
+    };
   }, [tipo, porte]);
 
   return (

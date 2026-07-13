@@ -21,7 +21,9 @@ export default function FormularioPet({ petInicial }) {
     ...CAMPOS_INICIAIS,
     ...(petInicial &&
       Object.fromEntries(
-        Object.entries(petInicial).filter(([, v]) => v !== null && v !== undefined),
+        Object.entries(petInicial).filter(
+          ([, v]) => v !== null && v !== undefined,
+        ),
       )),
   }));
   const [erro, setErro] = useState("");

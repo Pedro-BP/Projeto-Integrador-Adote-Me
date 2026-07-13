@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 class Postagem
 {
     private const SELECT_COM_JOIN =
-        "SELECT postagens.*, pets.nome AS pet_nome, usuarios.nome AS usuario_nome
+    "SELECT postagens.*, pets.nome AS pet_nome, usuarios.nome AS usuario_nome
          FROM postagens
          JOIN pets ON pets.id = postagens.pet_id
          JOIN usuarios ON usuarios.id = postagens.usuario_id";

@@ -8,7 +8,6 @@ export default function FormularioLogin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [lembrar, setLembrar] = useState(false);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const navigate = useNavigate();
@@ -109,16 +108,6 @@ export default function FormularioLogin() {
               />
             </div>
           </div>
-
-          <label className="flex items-center gap-2 text-sm text-[#46564B]">
-            <input
-              type="checkbox"
-              checked={lembrar}
-              onChange={(e) => setLembrar(e.target.checked)}
-              className="h-4 w-4 rounded border-[#1E3D32]/30 text-cyan-600 focus:ring-cyan-600/30"
-            />
-            Lembrar de mim
-          </label>
 
           <button
             type="submit"

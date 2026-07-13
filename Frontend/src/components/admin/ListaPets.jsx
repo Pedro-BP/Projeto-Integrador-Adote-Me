@@ -21,12 +21,25 @@ export default function ListaPets() {
   const [porte, setPorte] = useState("");
 
   useEffect(() => {
-    setCarregando(true);
-    setErro("");
-    listarPets({ tipo, porte })
-      .then(setPets)
-      .catch((err) => setErro(err.message))
-      .finally(() => setCarregando(false));
+    let cancelado = false;
+
+    async function carregarPets() {
+      setCarregando(true);
+      setErro("");
+      try {
+        const resultado = await listarPets({ tipo, porte });
+        if (!cancelado) setPets(resultado);
+      } catch (err) {
+        if (!cancelado) setErro(err.message);
+      } finally {
+        if (!cancelado) setCarregando(false);
+      }
+    }
+
+    carregarPets();
+    return () => {
+      cancelado = true;
+    };
   }, [tipo, porte]);
 
   async function alternarStatus(id) {
@@ -99,7 +112,7 @@ export default function ListaPets() {
 
         {!carregando && !erro && (
           <>
-            <table className="w-full min-w-[860px] text-left">
+            <table className="w-full min-w-215 text-left">
               <thead>
                 <tr className="border-b border-[#1E3D32]/[0.14]">
                   {COLUNAS.map((coluna) => (

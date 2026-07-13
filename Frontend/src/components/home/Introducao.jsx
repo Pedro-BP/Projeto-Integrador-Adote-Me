@@ -16,7 +16,7 @@ export default function Introducao() {
             </em>
           </h1>
 
-          <p className="mb-8 max-w-[46ch] text-lg text-[#46564B]">
+          <p className="mb-8 max-w-[46ch] text-lg text-[#46564B] text-justify">
             Acreditamos que todo animal merece um lar. Facilitamos a adoção
             responsável, aproximando pets de famílias que possam oferecer amor e
             cuidados por toda a vida
@@ -32,7 +32,12 @@ export default function Introducao() {
           </div>
         </div>
 
-        <div className="relative flex aspect-4/5 items-center justify-center rounded-[28px] bg-linear-to-br from-[#1E3D32] via-[#2F5A48] to-[#E3A63D]">
+        <div className="relative flex aspect-4/5 items-center justify-center overflow-hidden rounded-[28px] bg-linear-to-br from-[#1E3D32] via-[#2F5A48] to-[#E3A63D]">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgtDfuNiXcgKIie5a9VpSax3IdT1Jeu75J1Vk-atT7Xg&s=10"
+            alt="Pet"
+            className="h-full w-full object-cover"
+          />
           <div className="absolute inset-x-5 bottom-5 rounded-2xl bg-[#1C2620]/55 px-4 py-3.5 font-[IBM_Plex_Mono,monospace] text-sm text-white backdrop-blur-sm">
             Do Adote-Me para o colo de uma família.
           </div>

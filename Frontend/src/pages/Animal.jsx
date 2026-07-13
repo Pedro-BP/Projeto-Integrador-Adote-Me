@@ -13,12 +13,25 @@ export default function Animal() {
   const [erro, setErro] = useState("");
 
   useEffect(() => {
-    setCarregando(true);
-    setErro("");
-    buscarPet(id)
-      .then(setPet)
-      .catch((err) => setErro(err.message))
-      .finally(() => setCarregando(false));
+    let cancelado = false;
+
+    async function carregarPet() {
+      setCarregando(true);
+      setErro("");
+      try {
+        const resultado = await buscarPet(id);
+        if (!cancelado) setPet(resultado);
+      } catch (err) {
+        if (!cancelado) setErro(err.message);
+      } finally {
+        if (!cancelado) setCarregando(false);
+      }
+    }
+
+    carregarPet();
+    return () => {
+      cancelado = true;
+    };
   }, [id]);
 
   return (

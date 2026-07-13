@@ -1,7 +1,7 @@
-const HIGHLIGHTS = [
-  "🏠 Acolhimento responsável",
-  "🐾 Animais disponíveis para adoção",
-  "❤️ Adoção consciente",
+const proposta = [
+  "- Acolhimento responsável",
+  "- Animais disponíveis para adoção",
+  "- Adoção consciente",
 ];
 
 export default function Sobre() {
@@ -12,7 +12,7 @@ export default function Sobre() {
           <h2 className="mb-6 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem]">
             Sobre o Adote-Me
           </h2>
-          <p className="mb-4 text-[#46564B]">
+          <p className="mb-4 text-[#46564B] text-justify">
             No Adote-Me, acreditamos que todo animal merece uma segunda chance.
             Nossa missão é conectar cães e gatos que aguardam por um lar a
             pessoas dispostas a oferecer amor, cuidado e responsabilidade. Por
@@ -20,7 +20,7 @@ export default function Sobre() {
             responsável, aproximando protetores, ONGs e futuros tutores de forma
             simples, segura e organizada.
           </p>
-          <p className="mb-4 text-[#46564B]">
+          <p className="mb-4 text-[#46564B] text-justify">
             Mais do que um site de adoção, queremos incentivar a conscientização
             sobre a importância de combater o abandono e promover a guarda
             responsável. Cada adoção representa uma nova história, um recomeço e
@@ -29,7 +29,7 @@ export default function Sobre() {
             dessa corrente de solidariedade e amor pelos animais.
           </p>
           <ul className="mt-6 grid gap-3.5">
-            {HIGHLIGHTS.map((item) => (
+            {proposta.map((item) => (
               <li
                 key={item}
                 className="flex items-start gap-3 text-[0.95rem] text-[#1C2620]"
@@ -40,7 +40,13 @@ export default function Sobre() {
           </ul>
         </div>
 
-        <div className="flex aspect-square items-center justify-center rounded-3xl bg-linear-to-br from-[#E3A63D] to-[#C15A2B]" />
+        <div className="aspect-square overflow-hidden rounded-3xl bg-linear-to-br from-[#E3A63D] to-[#C15A2B]">
+          <img
+            src="https://crmvsp.gov.br/wp-content/uploads/2023/07/04.07.2023_Cuidados-com-caes-e-gatos-no-inverno_veja-como-proteger-seus-pets_AdobeStock_194955015-1024x683.jpeg"
+            alt="Cães e gatos recebendo cuidados"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </section>
   );
