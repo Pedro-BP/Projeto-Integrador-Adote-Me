@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../Models/Pet.php";
+require_once __DIR__ . "/../Helpers/UploadHelper.php";
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -36,12 +37,23 @@ class PetController
 
     public function store(Request $request, Response $response): Response
     {
-        $dados = json_decode($request->getBody()->getContents(), true) ?? [];
+        $dados = $request->getParsedBody() ?? [];
         $erro = $this->validar($dados);
         if ($erro) {
             $response->getBody()->write(json_encode(['erro' => $erro]));
             return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
         }
+
+        $arquivo = $request->getUploadedFiles()['foto'] ?? null;
+        if ($arquivo && $arquivo->getError() === UPLOAD_ERR_OK) {
+            try {
+                $dados['foto_url'] = UploadHelper::salvar($arquivo, 'pets');
+            } catch (InvalidArgumentException $e) {
+                $response->getBody()->write(json_encode(['erro' => $e->getMessage()]));
+                return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
+            }
+        }
+
         $adminId = $request->getAttribute('usuario_id');
         $id = Pet::create($dados, $adminId);
         $response->getBody()->write(json_encode([
@@ -49,6 +61,37 @@ class PetController
             'mensagem' => 'Pet cadastrado com sucesso',
         ]));
         return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
+    }
+
+    public function atualizarFoto(Request $request, Response $response, array $args): Response
+    {
+        $pet = Pet::findById($args['id']);
+        if (!$pet) {
+            $response->getBody()->write(json_encode(['erro' => 'Pet não encontrado']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $arquivo = $request->getUploadedFiles()['foto'] ?? null;
+        if (!$arquivo || $arquivo->getError() !== UPLOAD_ERR_OK) {
+            $response->getBody()->write(json_encode(['erro' => 'Envie um arquivo de imagem no campo "foto"']));
+            return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
+        }
+
+        try {
+            $novoPath = UploadHelper::salvar($arquivo, 'pets');
+        } catch (InvalidArgumentException $e) {
+            $response->getBody()->write(json_encode(['erro' => $e->getMessage()]));
+            return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
+        }
+
+        UploadHelper::remover($pet['foto_url']);
+        Pet::update($args['id'], ['foto_url' => $novoPath]);
+
+        $response->getBody()->write(json_encode([
+            'foto_url' => $novoPath,
+            'mensagem' => 'Foto atualizada com sucesso',
+        ]));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 
     public function update(Request $request, Response $response, array $args): Response
@@ -94,6 +137,7 @@ class PetController
             }
             throw $e;
         }
+        UploadHelper::remover($pet['foto_url']);
         $response->getBody()->write(json_encode(['mensagem' => 'Pet removido com sucesso']));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }

@@ -20,10 +20,10 @@ export default function ComoAjudar() {
     <section id="ajudar" className="bg-cyan-50 px-6 py-24">
       <div className="mx-auto max-w-280">
         <div className="mb-12 max-w-xl">
-          <h2 className="mb-3.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem]">
+          <h2 className="mb-3.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem] dark:text-[#EDEAE0]">
             Como você pode ajudar
           </h2>
-          <p className="text-[#46564B]">
+          <p className="text-[#46564B] dark:text-[#A8B0A8]">
             Existem várias formas de apoiar o trabalho do instituto, escolha a
             que combina com você.
           </p>
@@ -33,12 +33,12 @@ export default function ComoAjudar() {
           {HELP_CARDS.map((c) => (
             <div
               key={c.title}
-              className="flex flex-col gap-3.5 rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-7"
+              className="flex flex-col gap-3.5 rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-7 dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]"
             >
-              <h3 className="font-[Fraunces,serif] text-xl text-[#1E3D32]">
+              <h3 className="font-[Fraunces,serif] text-xl text-[#1E3D32] dark:text-[#EDEAE0]">
                 {c.title}
               </h3>
-              <p className="grow text-sm text-[#46564B]">{c.text}</p>
+              <p className="grow text-sm text-[#46564B] dark:text-[#A8B0A8]">{c.text}</p>
               {c.to ? (
                 <Link
                   to={c.to}

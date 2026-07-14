@@ -16,7 +16,7 @@ export default function Introducao() {
             </em>
           </h1>
 
-          <p className="mb-8 max-w-[46ch] text-lg text-[#46564B] text-justify">
+          <p className="mb-8 max-w-[46ch] text-lg text-[#46564B] text-justify dark:text-[#A8B0A8]">
             Acreditamos que todo animal merece um lar. Facilitamos a adoção
             responsável, aproximando pets de famílias que possam oferecer amor e
             cuidados por toda a vida

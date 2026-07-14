@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { curtirPostagem } from "../../services/api";
+import { curtirPostagem, resolverFotoUrl } from "../../services/api";
 import { FOTO_PLACEHOLDER } from "../../constants/pets";
 
 function formatarTempoRelativo(dataSql) {
@@ -36,19 +36,19 @@ export default function CardPostagem({ postagem }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+    <div className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]">
       <img
-        src={postagem.foto_url || FOTO_PLACEHOLDER}
+        src={resolverFotoUrl(postagem.foto_url) || FOTO_PLACEHOLDER}
         alt={`${postagem.pet_nome} com a nova família`}
         className="h-64 w-full object-cover"
       />
 
       <div className="p-6">
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="font-[Fraunces,serif] text-2xl font-bold text-[#1E3D32]">
+          <h2 className="font-[Fraunces,serif] text-2xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
             {postagem.pet_nome}
           </h2>
-          <span className="shrink-0 rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider text-[#1E3D32]">
+          <span className="shrink-0 rounded-full bg-[#E7EEE5] px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider text-[#1E3D32] dark:bg-[#24332B] dark:text-[#EDEAE0]">
             {formatarTempoRelativo(postagem.criado_em)}
           </span>
         </div>
@@ -57,7 +57,7 @@ export default function CardPostagem({ postagem }) {
           Adotado(a) por {postagem.usuario_nome}
         </p>
 
-        <p className="mb-6 text-[#46564B]">{postagem.relato}</p>
+        <p className="mb-6 text-[#46564B] dark:text-[#A8B0A8]">{postagem.relato}</p>
 
         <button
           type="button"
@@ -67,7 +67,7 @@ export default function CardPostagem({ postagem }) {
           className={`flex w-full items-center justify-center gap-2 rounded-full border py-3 font-semibold transition disabled:cursor-default ${
             curtido
               ? "border-[#C15A2B] bg-[#C15A2B] text-white"
-              : "border-[#1E3D32] text-[#1E3D32] hover:bg-[#1E3D32] hover:text-white"
+              : "border-[#1E3D32] text-[#1E3D32] hover:bg-[#1E3D32] hover:text-white dark:border-[#EDEAE0] dark:text-[#EDEAE0] dark:hover:bg-[#EDEAE0] dark:hover:text-[#121815]"
           }`}
         >
           <svg

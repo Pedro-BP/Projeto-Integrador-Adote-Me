@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../Models/Postagem.php";
 require_once __DIR__ . "/../Models/Pet.php";
+require_once __DIR__ . "/../Helpers/UploadHelper.php";
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -31,7 +32,7 @@ class PostagemController
 
     public function store(Request $request, Response $response): Response
     {
-        $dados = json_decode($request->getBody()->getContents(), true) ?? [];
+        $dados = $request->getParsedBody() ?? [];
         if (empty($dados['pet_id'])) {
             $response->getBody()->write(json_encode(['erro' => 'pet_id é obrigatório']));
             return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
@@ -40,6 +41,17 @@ class PostagemController
             $response->getBody()->write(json_encode(['erro' => 'Pet não encontrado']));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
+
+        $arquivo = $request->getUploadedFiles()['foto'] ?? null;
+        if ($arquivo && $arquivo->getError() === UPLOAD_ERR_OK) {
+            try {
+                $dados['foto_url'] = UploadHelper::salvar($arquivo, 'postagens');
+            } catch (InvalidArgumentException $e) {
+                $response->getBody()->write(json_encode(['erro' => $e->getMessage()]));
+                return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
+            }
+        }
+
         $usuarioId = $request->getAttribute('usuario_id');
         $id = Postagem::create($dados, $usuarioId);
         $response->getBody()->write(json_encode([

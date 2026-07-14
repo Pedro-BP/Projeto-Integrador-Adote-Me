@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { TIPO_LABEL, PORTE_LABEL } from "../../constants/pets";
+import { resolverFotoUrl } from "../../services/api";
 
 export default function DestaquePet({ pet }) {
+  const fotoUrl = resolverFotoUrl(pet.foto_url);
   const numeroLimpo = pet.numero ? pet.numero.replace(/\D/g, "") : "";
   const whatsappHref = numeroLimpo
     ? `https://wa.me/55${numeroLimpo}?text=${encodeURIComponent(
@@ -24,21 +26,21 @@ export default function DestaquePet({ pet }) {
       <div className="mx-auto max-w-280">
         <Link
           to="/animais"
-          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
+          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32] dark:text-[#A8B0A8] dark:hover:text-[#EDEAE0]"
         >
           ← Voltar para adoção
         </Link>
 
         <div className="grid items-center gap-12 md:grid-cols-[1fr_1.1fr]">
           <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[28px] bg-linear-to-br from-[#2F5A48] to-[#1E3D32]">
-            {pet.foto_url && (
+            {fotoUrl && (
               <img
-                src={pet.foto_url}
+                src={fotoUrl}
                 alt={pet.nome}
                 className="h-full w-full object-cover"
               />
             )}
-            <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.08em] text-cyan-700">
+            <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.08em] text-cyan-700 dark:bg-[#1A2420]/95">
               {pet.status === "disponivel"
                 ? "Disponível para adoção"
                 : "Adotado"}
@@ -58,14 +60,14 @@ export default function DestaquePet({ pet }) {
               {fatos.map((f) => (
                 <span
                   key={f.label}
-                  className="rounded-full bg-[#E7EEE5] px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-[#1E3D32]"
+                  className="rounded-full bg-[#E7EEE5] px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-[#1E3D32] dark:bg-[#24332B] dark:text-[#EDEAE0]"
                 >
                   {f.value}
                 </span>
               ))}
             </div>
 
-            <p className="mb-8 max-w-[46ch] text-lg text-[#46564B]">
+            <p className="mb-8 max-w-[46ch] text-lg text-[#46564B] dark:text-[#A8B0A8]">
               {pet.historia
                 ? `${pet.historia.split(".")[0]}. Conheça a história completa de ${pet.nome} e dê o primeiro passo para mudar a vida dele(a).`
                 : `Conheça ${pet.nome} e dê o primeiro passo para mudar a vida dele(a).`}
@@ -83,7 +85,7 @@ export default function DestaquePet({ pet }) {
                   href={whatsappHref}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-stone-800 hover:text-white"
+                  className="inline-flex items-center justify-center rounded-full border border-[#1E3D32] px-6 py-3 text-sm font-semibold text-[#1E3D32] transition-colors hover:bg-stone-800 hover:text-white dark:border-[#EDEAE0] dark:text-[#EDEAE0]"
                 >
                   Falar no WhatsApp
                 </a>

@@ -39,10 +39,6 @@ O **Adote-Me** nasceu para resolver um problema simples: em Tramandaí, ONGs já
 - ❌ Geolocalização/busca por distância — cidade/bairro são apenas texto livre, sem mapa.
 - ❌ Aplicativo mobile nativo — o projeto é apenas web.
 
-## Protótipo
-
-> Protótipo das telas em produção no Canva — o link e os prints serão adicionados aqui assim que estiver pronto.
-
 ## Arquitetura e tecnologias
 
 | Camada                 | Tecnologia                                                                           |
@@ -156,20 +152,20 @@ O script completo de criação do banco está em [`database.sql`](./database.sql
 
 URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Authorization: Bearer <token>`, obtido em `POST /login`.
 
-| Método | Rota                     | Acesso                | Descrição                                                             |
-| ------ | ------------------------ | ---------------------- | ----------------------------------------------------------------------- |
-| POST   | `/usuarios`               | Público                | Cadastra um usuário. `perfil` nunca vem do corpo — todo cadastro público é forçado a `usuario` |
-| POST   | `/login`                  | Público                | Autentica com e-mail/senha e retorna `{ token, usuario }`               |
-| GET    | `/usuarios`                | Logado (`admin`)      | Lista todos os usuários (sem `senha_hash`)                              |
-| GET    | `/pets`                    | Público                | Lista pets. Aceita filtros por query string: `?tipo=`, `?porte=` e `?status=` |
-| GET    | `/pets/{id}`               | Público                | Detalhe de um pet                                                        |
-| POST   | `/pets`                    | Logado (`admin`)      | Cadastra um pet                                                         |
-| PUT    | `/pets/{id}`               | Logado (`admin`)      | Atualiza um pet (só os campos enviados são alterados)                   |
-| DELETE | `/pets/{id}`               | Logado (`admin`)      | Remove um pet (falha com 409 se houver postagens vinculadas)            |
-| GET    | `/postagens`               | Público                | Lista postagens, com `pet_nome`/`usuario_nome` já resolvidos via JOIN   |
-| GET    | `/postagens/{id}`          | Público                | Detalhe de uma postagem                                                 |
-| POST   | `/postagens`               | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto_url`, `relato`)         |
-| POST   | `/postagens/{id}/curtir`   | Público                | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")   |
+| Método | Rota                     | Acesso                   | Descrição                                                                                      |
+| ------ | ------------------------ | ------------------------ | ---------------------------------------------------------------------------------------------- |
+| POST   | `/usuarios`              | Público                  | Cadastra um usuário. `perfil` nunca vem do corpo — todo cadastro público é forçado a `usuario` |
+| POST   | `/login`                 | Público                  | Autentica com e-mail/senha e retorna `{ token, usuario }`                                      |
+| GET    | `/usuarios`              | Logado (`admin`)         | Lista todos os usuários (sem `senha_hash`)                                                     |
+| GET    | `/pets`                  | Público                  | Lista pets. Aceita filtros por query string: `?tipo=`, `?porte=` e `?status=`                  |
+| GET    | `/pets/{id}`             | Público                  | Detalhe de um pet                                                                              |
+| POST   | `/pets`                  | Logado (`admin`)         | Cadastra um pet                                                                                |
+| PUT    | `/pets/{id}`             | Logado (`admin`)         | Atualiza um pet (só os campos enviados são alterados)                                          |
+| DELETE | `/pets/{id}`             | Logado (`admin`)         | Remove um pet (falha com 409 se houver postagens vinculadas)                                   |
+| GET    | `/postagens`             | Público                  | Lista postagens, com `pet_nome`/`usuario_nome` já resolvidos via JOIN                          |
+| GET    | `/postagens/{id}`        | Público                  | Detalhe de uma postagem                                                                        |
+| POST   | `/postagens`             | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto_url`, `relato`)                                  |
+| POST   | `/postagens/{id}/curtir` | Público                  | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")                          |
 
 Respostas de erro seguem o formato `{ "erro": "mensagem" }`, com o status HTTP correspondente (`401` sem token, `403` perfil sem permissão, `404` não encontrado, `409` conflito, `422` validação).
 
@@ -246,7 +242,4 @@ Boas práticas:
 
 ## Status
 
-Projeto em desenvolvimento — Projeto Integrador do curso.
-
-<!-- ## Licença
-> Defina aqui a licença do projeto (ex: MIT), se aplicável. -->
+Projeto em desenvolvimento — Projeto Integrador do curso de Técnico em Informática.

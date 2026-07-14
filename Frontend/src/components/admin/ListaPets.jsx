@@ -72,7 +72,7 @@ export default function ListaPets() {
           value={tipo}
           onChange={(e) => setTipo(e.target.value)}
           aria-label="Filtrar por tipo"
-          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
         >
           <option value="">Todos os tipos</option>
           {Object.entries(TIPO_LABEL).map(([valor, rotulo]) => (
@@ -86,7 +86,7 @@ export default function ListaPets() {
           value={porte}
           onChange={(e) => setPorte(e.target.value)}
           aria-label="Filtrar por porte"
-          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+          className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
         >
           <option value="">Todos os portes</option>
           {Object.entries(PORTE_LABEL).map(([valor, rotulo]) => (
@@ -97,9 +97,9 @@ export default function ListaPets() {
         </select>
       </div>
 
-      <div className="mx-auto max-w-280 overflow-x-auto rounded-[20px] border border-[#1E3D32]/[0.14] bg-white">
+      <div className="mx-auto max-w-280 overflow-x-auto rounded-[20px] border border-[#1E3D32]/[0.14] bg-white dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]">
         {carregando && (
-          <p className="px-6 py-10 text-center text-sm text-[#46564B]">
+          <p className="px-6 py-10 text-center text-sm text-[#46564B] dark:text-[#A8B0A8]">
             Carregando pets...
           </p>
         )}
@@ -114,11 +114,11 @@ export default function ListaPets() {
           <>
             <table className="w-full min-w-215 text-left">
               <thead>
-                <tr className="border-b border-[#1E3D32]/[0.14]">
+                <tr className="border-b border-[#1E3D32]/[0.14] dark:border-[#EDEAE0]/[0.14]">
                   {COLUNAS.map((coluna) => (
                     <th
                       key={coluna}
-                      className="px-6 py-4 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-[#46564B]"
+                      className="px-6 py-4 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-wider text-[#46564B] dark:text-[#A8B0A8]"
                     >
                       {coluna}
                     </th>
@@ -138,7 +138,7 @@ export default function ListaPets() {
             </table>
 
             {pets.length === 0 && (
-              <p className="px-6 py-10 text-center text-sm text-[#46564B]">
+              <p className="px-6 py-10 text-center text-sm text-[#46564B] dark:text-[#A8B0A8]">
                 {tipo || porte
                   ? "Nenhum pet cadastrado com esse filtro."
                   : "Nenhum pet cadastrado no momento."}

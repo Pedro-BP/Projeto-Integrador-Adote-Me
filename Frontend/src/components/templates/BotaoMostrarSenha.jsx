@@ -4,7 +4,7 @@ export default function BotaoMostrarSenha({ visible, onToggle }) {
       type="button"
       onClick={onToggle}
       aria-label={visible ? "Ocultar senha" : "Mostrar senha"}
-      className="absolute inset-y-0 right-0 flex items-center px-3.5 text-[#46564B] hover:text-[#1E3D32]"
+      className="absolute inset-y-0 right-0 flex items-center px-3.5 text-[#46564B] hover:text-[#1E3D32] dark:text-[#A8B0A8] dark:hover:text-[#EDEAE0]"
     >
       {visible ? (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

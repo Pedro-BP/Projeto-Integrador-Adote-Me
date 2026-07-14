@@ -18,7 +18,7 @@ export default function ListaPostagens() {
     <section className="px-6 pb-20">
       <div className="mx-auto max-w-280">
         {carregando && (
-          <p className="text-center text-[#46564B]">Carregando postagens...</p>
+          <p className="text-center text-[#46564B] dark:text-[#A8B0A8]">Carregando postagens...</p>
         )}
 
         {!carregando && erro && (
@@ -26,7 +26,7 @@ export default function ListaPostagens() {
         )}
 
         {!carregando && !erro && postagens.length === 0 && (
-          <p className="text-center text-[#46564B]">
+          <p className="text-center text-[#46564B] dark:text-[#A8B0A8]">
             Nenhuma postagem por enquanto.
           </p>
         )}

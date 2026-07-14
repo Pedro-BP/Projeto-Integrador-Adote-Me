@@ -9,7 +9,7 @@ export default function Introducao() {
             Histórias de adoção
           </span>
 
-          <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32]">
+          <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
             Pós adoção
           </h1>
         </div>

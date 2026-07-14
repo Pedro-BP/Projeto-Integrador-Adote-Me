@@ -44,7 +44,7 @@ export default function Vitrine() {
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
             aria-label="Filtrar por tipo"
-            className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+            className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
           >
             <option value="">Todos os tipos</option>
             {Object.entries(TIPO_LABEL).map(([valor, rotulo]) => (
@@ -58,7 +58,7 @@ export default function Vitrine() {
             value={porte}
             onChange={(e) => setPorte(e.target.value)}
             aria-label="Filtrar por porte"
-            className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+            className="rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-2.5 text-sm text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
           >
             <option value="">Todos os portes</option>
             {Object.entries(PORTE_LABEL).map(([valor, rotulo]) => (
@@ -70,7 +70,7 @@ export default function Vitrine() {
         </div>
 
         {carregando && (
-          <p className="text-center text-[#46564B]">Carregando pets...</p>
+          <p className="text-center text-[#46564B] dark:text-[#A8B0A8]">Carregando pets...</p>
         )}
 
         {!carregando && erro && (
@@ -78,7 +78,7 @@ export default function Vitrine() {
         )}
 
         {!carregando && !erro && pets.length === 0 && (
-          <p className="text-center text-[#46564B]">
+          <p className="text-center text-[#46564B] dark:text-[#A8B0A8]">
             Nenhum pet disponível com esse filtro no momento.
           </p>
         )}

@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { criarPet, atualizarPet } from "../../services/api";
+import {
+  criarPet,
+  atualizarPet,
+  atualizarFotoPet,
+  resolverFotoUrl,
+} from "../../services/api";
 
 const form = {
   nome: "",
@@ -9,7 +14,6 @@ const form = {
   idade: "",
   cidade: "",
   bairro: "",
-  foto_url: "",
   historia: "",
   numero: "",
   email: "",
@@ -26,12 +30,24 @@ export default function FormularioPet({ petInicial }) {
         ),
       )),
   }));
+  const [arquivoFoto, setArquivoFoto] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(() =>
+    resolverFotoUrl(petInicial?.foto_url),
+  );
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const navigate = useNavigate();
 
   function atualizarCampo(campo) {
     return (e) => setCampos((atual) => ({ ...atual, [campo]: e.target.value }));
+  }
+
+  function handleArquivoChange(e) {
+    const arquivo = e.target.files?.[0] ?? null;
+    setArquivoFoto(arquivo);
+    setPreviewUrl(
+      arquivo ? URL.createObjectURL(arquivo) : resolverFotoUrl(petInicial?.foto_url),
+    );
   }
 
   async function handleSubmit(e) {
@@ -52,7 +68,6 @@ export default function FormularioPet({ petInicial }) {
       idade: campos.idade,
       cidade: campos.cidade,
       bairro: campos.bairro,
-      foto_url: campos.foto_url,
       historia: campos.historia,
       numero: campos.numero,
       email: campos.email,
@@ -62,8 +77,11 @@ export default function FormularioPet({ petInicial }) {
     try {
       if (modoEdicao) {
         await atualizarPet(petInicial.id, dados);
+        if (arquivoFoto) {
+          await atualizarFotoPet(petInicial.id, arquivoFoto);
+        }
       } else {
-        await criarPet(dados);
+        await criarPet({ ...dados, foto: arquivoFoto });
       }
       navigate("/admin");
     } catch (err) {
@@ -78,17 +96,17 @@ export default function FormularioPet({ petInicial }) {
       <div className="mx-auto max-w-3xl">
         <Link
           to="/admin"
-          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
+          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32] dark:text-[#A8B0A8] dark:hover:text-[#EDEAE0]"
         >
           ← Voltar para o painel
         </Link>
 
-        <div className="rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-8 sm:p-10">
+        <div className="rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-8 sm:p-10 dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]">
           <span className="font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-cyan-600">
             Área administrativa
           </span>
 
-          <h1 className="mb-6 mt-3 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl">
+          <h1 className="mb-6 mt-3 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl dark:text-[#EDEAE0]">
             {modoEdicao ? "Editar pet" : "Cadastrar novo pet"}
           </h1>
 
@@ -105,7 +123,7 @@ export default function FormularioPet({ petInicial }) {
             <div>
               <label
                 htmlFor="nome"
-                className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
               >
                 Nome do pet
               </label>
@@ -116,7 +134,7 @@ export default function FormularioPet({ petInicial }) {
                 value={campos.nome}
                 onChange={atualizarCampo("nome")}
                 placeholder="Ex: Thor"
-                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
               />
             </div>
 
@@ -124,7 +142,7 @@ export default function FormularioPet({ petInicial }) {
               <div>
                 <label
                   htmlFor="tipo"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Espécie
                 </label>
@@ -132,7 +150,7 @@ export default function FormularioPet({ petInicial }) {
                   id="tipo"
                   value={campos.tipo}
                   onChange={atualizarCampo("tipo")}
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
                 >
                   <option value="cachorro">Cachorro</option>
                   <option value="gato">Gato</option>
@@ -142,7 +160,7 @@ export default function FormularioPet({ petInicial }) {
               <div>
                 <label
                   htmlFor="porte"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Porte
                 </label>
@@ -150,7 +168,7 @@ export default function FormularioPet({ petInicial }) {
                   id="porte"
                   value={campos.porte}
                   onChange={atualizarCampo("porte")}
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
                 >
                   <option value="pequeno">Pequeno</option>
                   <option value="medio">Médio</option>
@@ -163,7 +181,7 @@ export default function FormularioPet({ petInicial }) {
               <div>
                 <label
                   htmlFor="idade"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Idade
                 </label>
@@ -174,14 +192,14 @@ export default function FormularioPet({ petInicial }) {
                   value={campos.idade}
                   onChange={atualizarCampo("idade")}
                   placeholder="Ex: 2 anos"
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="cidade"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Cidade
                 </label>
@@ -192,7 +210,7 @@ export default function FormularioPet({ petInicial }) {
                   value={campos.cidade}
                   onChange={atualizarCampo("cidade")}
                   placeholder="Ex: Tramandaí"
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
                 />
               </div>
             </div>
@@ -200,7 +218,7 @@ export default function FormularioPet({ petInicial }) {
             <div>
               <label
                 htmlFor="bairro"
-                className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
               >
                 Bairro
               </label>
@@ -211,31 +229,37 @@ export default function FormularioPet({ petInicial }) {
                 value={campos.bairro}
                 onChange={atualizarCampo("bairro")}
                 placeholder="Ex: Centro"
-                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
               />
             </div>
 
             <div>
               <label
-                htmlFor="foto_url"
-                className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                htmlFor="foto"
+                className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
               >
-                URL da foto
+                Foto do pet
               </label>
+              {previewUrl && (
+                <img
+                  src={previewUrl}
+                  alt="Pré-visualização da foto"
+                  className="mb-3 h-40 w-40 rounded-xl object-cover"
+                />
+              )}
               <input
-                id="foto_url"
-                type="url"
-                value={campos.foto_url}
-                onChange={atualizarCampo("foto_url")}
-                placeholder="https://..."
-                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                id="foto"
+                type="file"
+                accept="image/*"
+                onChange={handleArquivoChange}
+                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors file:mr-4 file:rounded-full file:border-0 file:bg-cyan-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
               />
             </div>
 
             <div>
               <label
                 htmlFor="historia"
-                className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
               >
                 História
               </label>
@@ -246,7 +270,7 @@ export default function FormularioPet({ petInicial }) {
                 value={campos.historia}
                 onChange={atualizarCampo("historia")}
                 placeholder="Conte como esse pet foi resgatado e como ele é."
-                className="w-full resize-none rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                className="w-full resize-none rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
               />
             </div>
 
@@ -254,7 +278,7 @@ export default function FormularioPet({ petInicial }) {
               <div>
                 <label
                   htmlFor="numero"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   WhatsApp/telefone
                 </label>
@@ -264,14 +288,14 @@ export default function FormularioPet({ petInicial }) {
                   value={campos.numero}
                   onChange={atualizarCampo("numero")}
                   placeholder="(51) 90000-0000"
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   E-mail de contato
                 </label>
@@ -281,7 +305,7 @@ export default function FormularioPet({ petInicial }) {
                   value={campos.email}
                   onChange={atualizarCampo("email")}
                   placeholder="contato@adoteme.com"
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
                 />
               </div>
             </div>

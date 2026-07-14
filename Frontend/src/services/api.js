@@ -1,12 +1,27 @@
 import { obterSessao } from "./sessao";
 
-const API_URL = "http://localhost:8000";
+export const API_URL = "http://localhost:8000";
+
+export function resolverFotoUrl(fotoUrl) {
+  if (!fotoUrl) return null;
+  if (/^https?:\/\//.test(fotoUrl)) return fotoUrl;
+  return `${API_URL}${fotoUrl}`;
+}
+
+function montarFormData(dados) {
+  const fd = new FormData();
+  Object.entries(dados).forEach(([chave, valor]) => {
+    if (valor !== null && valor !== undefined) fd.append(chave, valor);
+  });
+  return fd;
+}
 
 async function request(path, options = {}) {
+  const ehFormData = options.body instanceof FormData;
   const response = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      ...(ehFormData ? {} : { "Content-Type": "application/json" }),
       ...options.headers,
     },
   });
@@ -55,7 +70,7 @@ export function criarPet(dados) {
   return request("/pets", {
     method: "POST",
     headers: authHeaders(),
-    body: JSON.stringify(dados),
+    body: montarFormData(dados),
   });
 }
 
@@ -64,6 +79,14 @@ export function atualizarPet(id, dados) {
     method: "PUT",
     headers: authHeaders(),
     body: JSON.stringify(dados),
+  });
+}
+
+export function atualizarFotoPet(id, arquivo) {
+  return request(`/pets/${id}/foto`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: montarFormData({ foto: arquivo }),
   });
 }
 
@@ -90,6 +113,6 @@ export function criarPostagem(dados) {
   return request("/postagens", {
     method: "POST",
     headers: authHeaders(),
-    body: JSON.stringify(dados),
+    body: montarFormData(dados),
   });
 }

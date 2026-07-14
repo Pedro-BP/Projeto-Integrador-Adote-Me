@@ -6,7 +6,8 @@ export default function FormularioPostagem() {
   const [pets, setPets] = useState([]);
   const [carregandoPets, setCarregandoPets] = useState(true);
   const [petId, setPetId] = useState("");
-  const [fotoUrl, setFotoUrl] = useState("");
+  const [arquivoFoto, setArquivoFoto] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [relato, setRelato] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -30,7 +31,7 @@ export default function FormularioPostagem() {
 
     setCarregando(true);
     try {
-      await criarPostagem({ pet_id: petId, foto_url: fotoUrl, relato });
+      await criarPostagem({ pet_id: petId, foto: arquivoFoto, relato });
       navigate("/feed");
     } catch (err) {
       setErro(err.message);
@@ -39,22 +40,28 @@ export default function FormularioPostagem() {
     }
   }
 
+  function handleArquivoChange(e) {
+    const arquivo = e.target.files?.[0] ?? null;
+    setArquivoFoto(arquivo);
+    setPreviewUrl(arquivo ? URL.createObjectURL(arquivo) : null);
+  }
+
   return (
     <section className="px-6 pb-20 pt-12 md:pt-16">
       <div className="mx-auto max-w-3xl">
         <Link
           to="/feed"
-          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
+          className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-[#46564B] hover:text-[#1E3D32] dark:text-[#A8B0A8] dark:hover:text-[#EDEAE0]"
         >
           ← Voltar para o feed
         </Link>
 
-        <div className="rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-8 sm:p-10">
+        <div className="rounded-[20px] border border-[#1E3D32]/[0.14] bg-white p-8 sm:p-10 dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]">
           <span className="font-[IBM_Plex_Mono,monospace] text-xs uppercase tracking-[0.12em] text-cyan-600">
             Pós-adoção
           </span>
 
-          <h1 className="mb-6 mt-3 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl">
+          <h1 className="mb-6 mt-3 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl dark:text-[#EDEAE0]">
             Compartilhar minha adoção
           </h1>
 
@@ -68,7 +75,7 @@ export default function FormularioPostagem() {
           )}
 
           {!carregandoPets && pets.length === 0 ? (
-            <p className="text-[#46564B]">
+            <p className="text-[#46564B] dark:text-[#A8B0A8]">
               Nenhum pet marcado como adotado ainda. Assim que um pet for
               adotado, ele aparece aqui pra você contar a história.
             </p>
@@ -77,7 +84,7 @@ export default function FormularioPostagem() {
               <div>
                 <label
                   htmlFor="petId"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Qual pet você adotou?
                 </label>
@@ -87,7 +94,7 @@ export default function FormularioPostagem() {
                   value={petId}
                   onChange={(e) => setPetId(e.target.value)}
                   disabled={carregandoPets}
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
                 >
                   <option value="">
                     {carregandoPets ? "Carregando..." : "Selecione um pet"}
@@ -102,25 +109,31 @@ export default function FormularioPostagem() {
 
               <div>
                 <label
-                  htmlFor="fotoUrl"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  htmlFor="foto"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
-                  URL da foto (opcional)
+                  Foto (opcional)
                 </label>
+                {previewUrl && (
+                  <img
+                    src={previewUrl}
+                    alt="Pré-visualização da foto"
+                    className="mb-3 h-40 w-40 rounded-xl object-cover"
+                  />
+                )}
                 <input
-                  id="fotoUrl"
-                  type="url"
-                  value={fotoUrl}
-                  onChange={(e) => setFotoUrl(e.target.value)}
-                  placeholder="https://..."
-                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  id="foto"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleArquivoChange}
+                  className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors file:mr-4 file:rounded-full file:border-0 file:bg-cyan-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="relato"
-                  className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+                  className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
                 >
                   Como ele está?
                 </label>
@@ -131,7 +144,7 @@ export default function FormularioPostagem() {
                   value={relato}
                   onChange={(e) => setRelato(e.target.value)}
                   placeholder="Conte como está a vida do seu novo pet."
-                  className="w-full resize-none rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                  className="w-full resize-none rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
                 />
               </div>
 

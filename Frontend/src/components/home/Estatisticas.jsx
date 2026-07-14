@@ -57,14 +57,14 @@ export default function Estatisticas() {
   ];
 
   return (
-    <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50">
+    <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50 dark:border-[#EDEAE0]/[0.14]">
       <div className="mx-auto grid max-w-280 grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-3">
         {stats.map((s) => (
           <div key={s.label}>
-            <div className="font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]">
+            <div className="font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
               {s.value}
             </div>
-            <div className="mt-1 font-[IBM_Plex_Mono,monospace] text-[0.72rem] uppercase tracking-[0.06em] text-[#46564B]">
+            <div className="mt-1 font-[IBM_Plex_Mono,monospace] text-[0.72rem] uppercase tracking-[0.06em] text-[#46564B] dark:text-[#A8B0A8]">
               {s.label}
             </div>
           </div>

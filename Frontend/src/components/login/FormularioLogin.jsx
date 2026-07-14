@@ -38,12 +38,12 @@ export default function FormularioLogin() {
       <div className="mx-auto w-full max-w-sm">
         <Link
           to="/"
-          className="mb-10 inline-flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32]"
+          className="mb-10 inline-flex items-center gap-2.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]"
         >
           Adote-Me
         </Link>
 
-        <h1 className="mb-2 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl">
+        <h1 className="mb-2 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-4xl dark:text-[#EDEAE0]">
           Bem-vindo de volta
         </h1>
 
@@ -60,7 +60,7 @@ export default function FormularioLogin() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1.5 block text-sm font-medium text-[#1C2620]"
+              className="mb-1.5 block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
             >
               E-mail
             </label>
@@ -72,7 +72,7 @@ export default function FormularioLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu@email.com"
-              className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+              className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
             />
           </div>
 
@@ -80,7 +80,7 @@ export default function FormularioLogin() {
             <div className="mb-1.5 flex items-center justify-between">
               <label
                 htmlFor="senha"
-                className="block text-sm font-medium text-[#1C2620]"
+                className="block text-sm font-medium text-[#1C2620] dark:text-[#F5F3EA]"
               >
                 Senha
               </label>
@@ -100,7 +100,7 @@ export default function FormularioLogin() {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 placeholder="••••••••"
-                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 pr-11 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20"
+                className="w-full rounded-xl border border-[#1E3D32]/18 bg-white px-4 py-3 pr-11 text-[#1C2620] outline-none transition-colors placeholder:text-[#46564B]/60 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 dark:border-[#EDEAE0]/18 dark:bg-[#1A2420] dark:text-[#F5F3EA] dark:placeholder:text-[#A8B0A8]/60"
               />
               <BotaoMostrarSenha
                 visible={mostrarSenha}
@@ -118,7 +118,7 @@ export default function FormularioLogin() {
           </button>
         </form>
 
-        <p className="mt-8 text-center text-sm text-[#46564B]">
+        <p className="mt-8 text-center text-sm text-[#46564B] dark:text-[#A8B0A8]">
           Ainda não tem conta?{" "}
           <Link
             to="/cadastro"

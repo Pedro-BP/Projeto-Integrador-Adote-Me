@@ -4,39 +4,40 @@ import {
   PORTE_LABEL,
   FOTO_PLACEHOLDER,
 } from "../../constants/pets";
+import { resolverFotoUrl } from "../../services/api";
 
 export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
   const disponivel = pet.status === "disponivel";
 
   return (
-    <tr className="border-b border-[#1E3D32]/8 last:border-0">
+    <tr className="border-b border-[#1E3D32]/8 last:border-0 dark:border-[#EDEAE0]/8">
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <img
-            src={pet.foto_url || FOTO_PLACEHOLDER}
+            src={resolverFotoUrl(pet.foto_url) || FOTO_PLACEHOLDER}
             alt={pet.nome}
             className="h-12 w-12 rounded-full object-cover"
           />
-          <span className="font-[Fraunces,serif] text-lg font-bold text-[#1E3D32]">
+          <span className="font-[Fraunces,serif] text-lg font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
             {pet.nome}
           </span>
         </div>
       </td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">
+      <td className="px-6 py-4 text-sm text-[#46564B] dark:text-[#A8B0A8]">
         {TIPO_LABEL[pet.tipo]}
       </td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">
+      <td className="px-6 py-4 text-sm text-[#46564B] dark:text-[#A8B0A8]">
         {PORTE_LABEL[pet.porte]}
       </td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">{pet.idade}</td>
-      <td className="px-6 py-4 text-sm text-[#46564B]">
+      <td className="px-6 py-4 text-sm text-[#46564B] dark:text-[#A8B0A8]">{pet.idade}</td>
+      <td className="px-6 py-4 text-sm text-[#46564B] dark:text-[#A8B0A8]">
         {pet.bairro}, {pet.cidade}
       </td>
       <td className="px-6 py-4">
         <span
           className={`rounded-full px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider ${
             disponivel
-              ? "bg-[#E7EEE5] text-[#1E3D32]"
+              ? "bg-[#E7EEE5] text-[#1E3D32] dark:bg-[#24332B] dark:text-[#EDEAE0]"
               : "bg-cyan-50 text-cyan-700"
           }`}
         >
@@ -48,7 +49,7 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
           <Link
             title="Editar"
             to={`/admin/pets/${pet.id}/editar`}
-            className="rounded-full border border-[#1E3D32] px-4 py-1.5 text-xs font-semibold text-[#1E3D32] transition hover:bg-[#1E3D32] hover:text-white"
+            className="rounded-full border border-[#1E3D32] px-4 py-1.5 text-xs font-semibold text-[#1E3D32] transition hover:bg-[#1E3D32] hover:text-white dark:border-[#EDEAE0] dark:text-[#EDEAE0] dark:hover:bg-[#EDEAE0] dark:hover:text-[#121815]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

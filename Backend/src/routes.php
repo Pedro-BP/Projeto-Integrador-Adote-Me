@@ -16,6 +16,7 @@ return function ($app) {
     $app->get('/pets/{id}', [$pet, 'show']);
     $app->post('/pets', [$pet, 'store'])->add(AuthMiddleware::check('admin'));
     $app->put('/pets/{id}', [$pet, 'update'])->add(AuthMiddleware::check('admin'));
+    $app->post('/pets/{id}/foto', [$pet, 'atualizarFoto'])->add(AuthMiddleware::check('admin'));
     $app->delete('/pets/{id}', [$pet, 'destroy'])->add(AuthMiddleware::check('admin'));
 
     $postagem = new PostagemController();

@@ -9,11 +9,11 @@ export default function Introducao() {
             Área administrativa
           </span>
 
-          <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32]">
+          <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
             Pets cadastrados
           </h1>
 
-          <p className="mt-4 max-w-[46ch] text-[#46564B]">
+          <p className="mt-4 max-w-[46ch] text-[#46564B] dark:text-[#A8B0A8]">
             Cadastre novos pets, atualize informações e marque adoções
             concluídas.
           </p>

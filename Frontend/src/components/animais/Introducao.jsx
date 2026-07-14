@@ -6,7 +6,7 @@ export default function Introducao() {
           Adoção responsável
         </span>
 
-        <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32]">
+        <h1 className="mt-3 font-[Fraunces,serif] text-5xl font-bold text-[#1E3D32] dark:text-[#EDEAE0]">
           Animais disponíveis
         </h1>
       </div>
