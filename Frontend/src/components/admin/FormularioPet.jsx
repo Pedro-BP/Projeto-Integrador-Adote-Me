@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { criarPet, atualizarPet } from "../../services/api";
 
-const CAMPOS_INICIAIS = {
+const form = {
   nome: "",
   tipo: "cachorro",
   porte: "pequeno",
@@ -18,7 +18,7 @@ const CAMPOS_INICIAIS = {
 export default function FormularioPet({ petInicial }) {
   const modoEdicao = Boolean(petInicial);
   const [campos, setCampos] = useState(() => ({
-    ...CAMPOS_INICIAIS,
+    ...form,
     ...(petInicial &&
       Object.fromEntries(
         Object.entries(petInicial).filter(

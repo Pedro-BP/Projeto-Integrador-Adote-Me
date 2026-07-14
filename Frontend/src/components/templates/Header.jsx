@@ -40,6 +40,9 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <Link to="/feed" className="transition-colors hover:text-[#1E3D32]">
+            Feed
+          </Link>
           {sessao?.usuario.perfil === "admin" && (
             <Link
               to="/admin"
@@ -126,6 +129,13 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/feed"
+            onClick={() => setMenuOpen(false)}
+            className="border-b border-[#1E3D32]/[0.14] py-2.5 font-medium text-[#46564B]"
+          >
+            Feed
+          </Link>
           {sessao?.usuario.perfil === "admin" && (
             <Link
               to="/admin"
