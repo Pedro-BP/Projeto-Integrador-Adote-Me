@@ -5,10 +5,12 @@ import ListaPets from "../components/admin/ListaPets";
 
 export default function Admin() {
   return (
-    <div className="bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
+    <div className="flex min-h-screen flex-col bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
       <Header />
-      <Introducao />
-      <ListaPets />
+      <main className="flex-1">
+        <Introducao />
+        <ListaPets />
+      </main>
       <Footer />
     </div>
   );

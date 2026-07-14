@@ -35,20 +35,22 @@ export default function Animal() {
   }, [id]);
 
   return (
-    <div className="bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
+    <div className="flex min-h-screen flex-col bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
       <Header />
-      {carregando && (
-        <p className="px-6 py-24 text-center text-[#46564B]">Carregando...</p>
-      )}
-      {!carregando && erro && (
-        <p className="px-6 py-24 text-center text-[#C15A2B]">{erro}</p>
-      )}
-      {!carregando && !erro && pet && (
-        <>
-          <DestaquePet pet={pet} />
-          <OutrosPets petAtualId={pet.id} />
-        </>
-      )}
+      <main className="flex-1">
+        {carregando && (
+          <p className="px-6 py-24 text-center text-[#46564B]">Carregando...</p>
+        )}
+        {!carregando && erro && (
+          <p className="px-6 py-24 text-center text-[#C15A2B]">{erro}</p>
+        )}
+        {!carregando && !erro && pet && (
+          <>
+            <DestaquePet pet={pet} />
+            <OutrosPets petAtualId={pet.id} />
+          </>
+        )}
+      </main>
       <Footer />
     </div>
   );

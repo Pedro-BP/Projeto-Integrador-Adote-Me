@@ -5,10 +5,12 @@ import ListaPostagens from "../components/feed/ListaPostagens";
 
 export default function Feed() {
   return (
-    <div className="bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
+    <div className="flex min-h-screen flex-col bg-[#FAF7EF] text-[#1C2620] font-[Inter,sans-serif] antialiased">
       <Header />
-      <Introducao />
-      <ListaPostagens />
+      <main className="flex-1">
+        <Introducao />
+        <ListaPostagens />
+      </main>
       <Footer />
     </div>
   );
