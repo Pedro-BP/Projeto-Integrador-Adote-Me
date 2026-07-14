@@ -53,7 +53,7 @@ export default function Footer() {
           <ul className="grid gap-2.5">
             <li>
               <a
-                href="mailto:contato@focinhofeliz.org"
+                href="mailto:adotemetramandai@gmail.com"
                 className="text-sm text-[#46564B] hover:text-[#1E3D32]"
               >
                 adotemetramandai@gmail.com
@@ -61,15 +61,9 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="tel:+550000000"
-                className="text-sm text-[#46564B] hover:text-[#1E3D32]"
-              >
-                (51) 9101-3434
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
+                href="https://www.instagram.com/adotemetramandai/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-[#46564B] hover:text-[#1E3D32]"
               >
                 Instagram

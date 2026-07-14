@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { obterSessao, limparSessao } from "../../services/sessao";
 
-const NAV_LINKS = [
+const links = [
   { href: "/#sobre", label: "Sobre" },
   { href: "/#ajudar", label: "Como ajudar" },
   { href: "/#resgates", label: "Recém-acolhidos" },
@@ -24,18 +24,14 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-[#1E3D32]/[0.14] bg-[#FAF7EF]/90 backdrop-blur-sm">
       <div className="flex items-center justify-between px-6 py-4">
         <Link to="/">
-          <img
-            src="/logoAdote_me.png"
-            alt="Adote-Me"
-            className="h-11 w-auto"
-          />
+          <img src="/logoAdote_me.png" alt="Adote-Me" className="h-11 w-auto" />
         </Link>
 
         <nav
           className="hidden gap-8 text-sm font-medium text-[#46564B] md:flex"
           aria-label="Navegação principal"
         >
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -57,19 +53,35 @@ export default function Header() {
         <div className="flex items-center gap-3">
           {sessao ? (
             <div className="hidden items-center gap-3 sm:flex">
+              <button
+                title="Sair"
+                type="button"
+                onClick={handleSair}
+                className="text-sm font-medium text-[#46564B] hover:text-[#1E3D32] cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-left-from-line-icon lucide-arrow-left-from-line"
+                >
+                  <path d="m9 6-6 6 6 6" />
+                  <path d="M3 12h14" />
+                  <path d="M21 19V5" />
+                </svg>
+              </button>
               <span
                 title={sessao.usuario.nome}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-600 text-sm font-semibold text-white"
               >
                 {sessao.usuario.nome.charAt(0).toUpperCase()}
               </span>
-              <button
-                type="button"
-                onClick={handleSair}
-                className="text-sm font-medium text-[#46564B] hover:text-[#1E3D32]"
-              >
-                Sair
-              </button>
             </div>
           ) : (
             <Link
@@ -104,7 +116,7 @@ export default function Header() {
           className="flex flex-col gap-1 border-b border-[#1E3D32]/[0.14] px-6 pb-5 md:hidden"
           aria-label="Navegação móvel"
         >
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
