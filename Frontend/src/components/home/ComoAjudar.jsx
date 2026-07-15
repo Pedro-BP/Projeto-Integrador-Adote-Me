@@ -17,7 +17,7 @@ const HELP_CARDS = [
 
 export default function ComoAjudar() {
   return (
-    <section id="ajudar" className="bg-cyan-50 px-6 py-24">
+    <section id="ajudar" className="bg-cyan-50 px-6 py-24 dark:bg-cyan-950/30">
       <div className="mx-auto max-w-280">
         <div className="mb-12 max-w-xl">
           <h2 className="mb-3.5 font-[Fraunces,serif] text-3xl font-bold text-[#1E3D32] sm:text-[2.3rem] dark:text-[#EDEAE0]">

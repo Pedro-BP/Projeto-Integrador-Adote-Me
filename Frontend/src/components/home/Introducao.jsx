@@ -9,7 +9,7 @@ export default function Introducao() {
             Conectando pets a novos lares
           </span>
 
-          <h1 className="mb-5 max-w-xl font-[Fraunces,serif] text-[2.3rem] font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl lg:text-[3.6rem]">
+          <h1 className="mb-5 max-w-xl font-[Fraunces,serif] text-[2.3rem] font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl lg:text-[3.6rem] dark:text-[#EDEAE0]">
             Cada adoção é{" "}
             <em className="font-medium not-italic text-cyan-500">
               um novo começo.

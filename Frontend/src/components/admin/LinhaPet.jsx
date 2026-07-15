@@ -38,7 +38,7 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
           className={`rounded-full px-2.5 py-1 font-[IBM_Plex_Mono,monospace] text-[0.66rem] uppercase tracking-wider ${
             disponivel
               ? "bg-[#E7EEE5] text-[#1E3D32] dark:bg-[#24332B] dark:text-[#EDEAE0]"
-              : "bg-cyan-50 text-cyan-700"
+              : "bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-300"
           }`}
         >
           {disponivel ? "Disponível" : "Adotado"}
@@ -71,7 +71,7 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
           <button
             type="button"
             onClick={() => onAlternarStatus(pet.id)}
-            className="rounded-full border border-cyan-600 px-4 py-1.5 text-xs font-semibold text-cyan-700 transition hover:bg-cyan-600 hover:text-white"
+            className="rounded-full border border-cyan-600 px-4 py-1.5 text-xs font-semibold text-cyan-700 transition hover:bg-cyan-600 hover:text-white dark:text-cyan-300"
           >
             Marcar como {disponivel ? "adotado" : "disponível"}
           </button>

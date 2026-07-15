@@ -40,7 +40,7 @@ export default function DestaquePet({ pet }) {
                 className="h-full w-full object-cover"
               />
             )}
-            <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.08em] text-cyan-700 dark:bg-[#1A2420]/95">
+            <span className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1.5 font-[IBM_Plex_Mono,monospace] text-[0.7rem] uppercase tracking-[0.08em] text-cyan-700 dark:bg-[#1A2420]/95 dark:text-cyan-300">
               {pet.status === "disponivel"
                 ? "Disponível para adoção"
                 : "Adotado"}
@@ -52,7 +52,7 @@ export default function DestaquePet({ pet }) {
               Ficha do animal
             </span>
 
-            <h1 className="mb-5 font-[Fraunces,serif] text-4xl font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl">
+            <h1 className="mb-5 font-[Fraunces,serif] text-4xl font-bold leading-[1.08] tracking-tight text-stone-800 sm:text-5xl dark:text-[#EDEAE0]">
               {pet.nome}
             </h1>
 

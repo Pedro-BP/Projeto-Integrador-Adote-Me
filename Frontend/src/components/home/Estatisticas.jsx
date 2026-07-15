@@ -57,7 +57,7 @@ export default function Estatisticas() {
   ];
 
   return (
-    <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50 dark:border-[#EDEAE0]/[0.14]">
+    <section className="border-y border-[#1E3D32]/[0.14] bg-cyan-50 dark:border-[#EDEAE0]/[0.14] dark:bg-cyan-950/30">
       <div className="mx-auto grid max-w-280 grid-cols-2 gap-7 px-6 py-10 sm:grid-cols-3">
         {stats.map((s) => (
           <div key={s.label}>

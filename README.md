@@ -164,7 +164,7 @@ URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Autho
 | DELETE | `/pets/{id}`             | Logado (`admin`)         | Remove um pet (falha com 409 se houver postagens vinculadas)                                   |
 | GET    | `/postagens`             | Público                  | Lista postagens, com `pet_nome`/`usuario_nome` já resolvidos via JOIN                          |
 | GET    | `/postagens/{id}`        | Público                  | Detalhe de uma postagem                                                                        |
-| POST   | `/postagens`             | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto`, `relato`)                                       |
+| POST   | `/postagens`             | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto`, `relato`)                                      |
 | POST   | `/postagens/{id}/curtir` | Público                  | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")                          |
 
 Respostas de erro seguem o formato `{ "erro": "mensagem" }`, com o status HTTP correspondente (`401` sem token, `403` perfil sem permissão, `404` não encontrado, `409` conflito, `422` validação).
@@ -217,23 +217,6 @@ UPDATE usuarios SET perfil = 'admin' WHERE email = 'seu@email.com';
 ```
 
 Faça login novamente após a promoção para receber um token com o novo perfil.
-
-## Padrão de commits
-
-O projeto segue o padrão [Conventional Commits](https://www.conventionalcommits.org/), com mensagens no imperativo e em português.
-| Tipo | Quando usar | Exemplo |
-| --- | --- | --- |
-| `feat` | Nova funcionalidade ou parte da estrutura do sistema | `feat: adiciona script de criação do banco de dados` |
-| `fix` | Correção de bug | `fix: corrige filtro de porte na listagem de pets` |
-| `docs` | Mudanças em documentação (README, comentários) | `docs: atualiza README com informações do projeto` |
-| `chore` | Tarefas de organização/configuração (rename, configs) | `chore: renomeia adote-me.sql para database.sql` |
-| `refactor` | Reorganização de código sem mudar comportamento | `refactor: reorganiza rotas da API` |
-
-Boas práticas:
-
-- Verbo no imperativo ("adiciona", "corrige"), não no gerúndio ou particípio.
-- Mensagem curta e objetiva na primeira linha (até ~50 caracteres).
-- Escopo opcional entre parênteses, ex: `feat(database): adiciona schema inicial`.
 
 ## Equipe
 
