@@ -4,7 +4,15 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use Slim\Factory\AppFactory;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
-$dotenv->load();
+$dotenv->safeLoad();
+
+// Em produção (Railway) não existe arquivo .env — as variáveis vêm
+// direto do ambiente (getenv()), então garantimos que caiam em $_ENV também.
+foreach (["DB_HOST", "DB_NAME", "DB_USER", "DB_PASS", "JWT_KEY"] as $chave) {
+    if (!isset($_ENV[$chave]) && getenv($chave) !== false) {
+        $_ENV[$chave] = getenv($chave);
+    }
+}
 
 $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
