@@ -32,7 +32,7 @@ export default function FormularioPet({ petInicial }) {
   }));
   const [arquivoFoto, setArquivoFoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(() =>
-    resolverFotoUrl(petInicial?.foto_url),
+    resolverFotoUrl(petInicial?.foto),
   );
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -46,7 +46,7 @@ export default function FormularioPet({ petInicial }) {
     const arquivo = e.target.files?.[0] ?? null;
     setArquivoFoto(arquivo);
     setPreviewUrl(
-      arquivo ? URL.createObjectURL(arquivo) : resolverFotoUrl(petInicial?.foto_url),
+      arquivo ? URL.createObjectURL(arquivo) : resolverFotoUrl(petInicial?.foto),
     );
   }
 

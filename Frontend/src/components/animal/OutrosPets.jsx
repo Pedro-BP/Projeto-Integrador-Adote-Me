@@ -37,9 +37,9 @@ export default function OutrosPets({ petAtualId }) {
               className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white transition-transform hover:-translate-y-1 dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]"
             >
               <div className="flex aspect-16/11 items-center justify-center overflow-hidden bg-linear-to-br from-[#2F5A48] to-[#1E3D32]">
-                {resolverFotoUrl(p.foto_url) && (
+                {resolverFotoUrl(p.foto) && (
                   <img
-                    src={resolverFotoUrl(p.foto_url)}
+                    src={resolverFotoUrl(p.foto)}
                     alt={p.nome}
                     className="h-full w-full object-cover"
                   />

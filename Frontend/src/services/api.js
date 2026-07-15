@@ -2,10 +2,10 @@ import { obterSessao } from "./sessao";
 
 export const API_URL = "http://localhost:8000";
 
-export function resolverFotoUrl(fotoUrl) {
-  if (!fotoUrl) return null;
-  if (/^https?:\/\//.test(fotoUrl)) return fotoUrl;
-  return `${API_URL}${fotoUrl}`;
+export function resolverFotoUrl(foto) {
+  if (!foto) return null;
+  if (/^https?:\/\//.test(foto)) return foto;
+  return `${API_URL}${foto}`;
 }
 
 function montarFormData(dados) {

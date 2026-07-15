@@ -43,8 +43,8 @@ class Pet
         $db = Connection::get();
         $id = Uuid::uuid4()->toString();
         $stmt = $db->prepare(
-            "INSERT INTO pets (id, nome, tipo, porte, idade, cidade, bairro, foto_url, historia, numero, email, admin_id)
-             VALUES (:id, :nome, :tipo, :porte, :idade, :cidade, :bairro, :foto_url, :historia, :numero, :email, :admin_id)"
+            "INSERT INTO pets (id, nome, tipo, porte, idade, cidade, bairro, foto, historia, numero, email, admin_id)
+             VALUES (:id, :nome, :tipo, :porte, :idade, :cidade, :bairro, :foto, :historia, :numero, :email, :admin_id)"
         );
         $stmt->execute([
             'id'        => $id,
@@ -54,7 +54,7 @@ class Pet
             'idade'     => $dados['idade']    ?? null,
             'cidade'    => $dados['cidade']   ?? null,
             'bairro'    => $dados['bairro']   ?? null,
-            'foto_url'  => $dados['foto_url'] ?? null,
+            'foto'      => $dados['foto']     ?? null,
             'historia'  => $dados['historia'] ?? null,
             'numero'    => $dados['numero']   ?? null,
             'email'     => $dados['email']    ?? null,
@@ -65,7 +65,7 @@ class Pet
 
     public static function update(string $id, array $dados)
     {
-        $campos = ['nome', 'tipo', 'porte', 'idade', 'cidade', 'bairro', 'foto_url', 'historia', 'numero', 'email', 'status'];
+        $campos = ['nome', 'tipo', 'porte', 'idade', 'cidade', 'bairro', 'foto', 'historia', 'numero', 'email', 'status'];
         $sets = [];
         $params = ['id' => $id];
         foreach ($campos as $campo) {

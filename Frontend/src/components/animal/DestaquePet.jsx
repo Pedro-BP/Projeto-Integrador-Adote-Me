@@ -3,7 +3,7 @@ import { TIPO_LABEL, PORTE_LABEL } from "../../constants/pets";
 import { resolverFotoUrl } from "../../services/api";
 
 export default function DestaquePet({ pet }) {
-  const fotoUrl = resolverFotoUrl(pet.foto_url);
+  const fotoUrl = resolverFotoUrl(pet.foto);
   const numeroLimpo = pet.numero ? pet.numero.replace(/\D/g, "") : "";
   const whatsappHref = numeroLimpo
     ? `https://wa.me/55${numeroLimpo}?text=${encodeURIComponent(

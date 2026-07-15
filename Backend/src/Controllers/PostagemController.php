@@ -45,7 +45,7 @@ class PostagemController
         $arquivo = $request->getUploadedFiles()['foto'] ?? null;
         if ($arquivo && $arquivo->getError() === UPLOAD_ERR_OK) {
             try {
-                $dados['foto_url'] = UploadHelper::salvar($arquivo, 'postagens');
+                $dados['foto'] = UploadHelper::salvar($arquivo, 'postagens');
             } catch (InvalidArgumentException $e) {
                 $response->getBody()->write(json_encode(['erro' => $e->getMessage()]));
                 return $response->withStatus(422)->withHeader('Content-Type', 'application/json');

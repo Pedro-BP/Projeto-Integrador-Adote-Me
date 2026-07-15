@@ -14,7 +14,7 @@ export default function LinhaPet({ pet, onAlternarStatus, onExcluir }) {
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <img
-            src={resolverFotoUrl(pet.foto_url) || FOTO_PLACEHOLDER}
+            src={resolverFotoUrl(pet.foto) || FOTO_PLACEHOLDER}
             alt={pet.nome}
             className="h-12 w-12 rounded-full object-cover"
           />

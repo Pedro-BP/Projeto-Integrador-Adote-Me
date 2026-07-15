@@ -64,7 +64,7 @@ export default function ResgatesRecentes() {
                 className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]"
               >
                 <img
-                  src={resolverFotoUrl(pet.foto_url) || FOTO_PLACEHOLDER}
+                  src={resolverFotoUrl(pet.foto) || FOTO_PLACEHOLDER}
                   alt={pet.nome}
                   className="aspect-16/11 w-full object-cover"
                 />

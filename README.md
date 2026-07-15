@@ -121,7 +121,7 @@ O banco é composto por três entidades principais: **usuarios** (admins e usuá
 | porte           | string                      | Pequeno, médio ou grande                 |
 | idade           | string                      | Idade estimada                           |
 | cidade / bairro | string                      | Localização do pet                       |
-| foto_url        | string                      | Foto do animal                           |
+| foto            | string                      | Path relativo da foto do animal          |
 | historia        | text                        | História/descrição do pet                |
 | numero / email  | string                      | Contato do responsável pela doação       |
 | status          | string                      | `disponivel` ou `adotado`                |
@@ -135,7 +135,7 @@ O banco é composto por três entidades principais: **usuarios** (admins e usuá
 | id         | char(36) (PK)               | UUID gerado pela aplicação (ramsey/uuid) |
 | pet_id     | char(36) (FK → pets.id)     | Pet relacionado ao post                  |
 | usuario_id | char(36) (FK → usuarios.id) | Usuário logado que fez o post            |
-| foto_url   | string                      | Foto do pet já adotado                   |
+| foto       | string                      | Path relativo da foto do pet já adotado  |
 | relato     | text                        | Relato de como o pet está                |
 | curtidas   | int                         | Contador de reações (sem exigir login)   |
 | criado_em  | datetime                    | Data da publicação                       |
@@ -164,7 +164,7 @@ URL base local: `http://localhost:8000`. Rotas protegidas exigem o header `Autho
 | DELETE | `/pets/{id}`             | Logado (`admin`)         | Remove um pet (falha com 409 se houver postagens vinculadas)                                   |
 | GET    | `/postagens`             | Público                  | Lista postagens, com `pet_nome`/`usuario_nome` já resolvidos via JOIN                          |
 | GET    | `/postagens/{id}`        | Público                  | Detalhe de uma postagem                                                                        |
-| POST   | `/postagens`             | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto_url`, `relato`)                                  |
+| POST   | `/postagens`             | Logado (qualquer perfil) | Cria uma postagem pós-adoção (`pet_id`, `foto`, `relato`)                                       |
 | POST   | `/postagens/{id}/curtir` | Público                  | Incrementa o contador de curtidas (sem exigir login, sem "descurtir")                          |
 
 Respostas de erro seguem o formato `{ "erro": "mensagem" }`, com o status HTTP correspondente (`401` sem token, `403` perfil sem permissão, `404` não encontrado, `409` conflito, `422` validação).

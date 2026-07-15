@@ -41,12 +41,12 @@ class UploadHelper
         return "/uploads/$subpasta/$nomeArquivo";
     }
 
-    public static function remover(?string $fotoUrl): void
+    public static function remover(?string $foto): void
     {
-        if (!$fotoUrl || !str_starts_with($fotoUrl, '/uploads/')) {
+        if (!$foto || !str_starts_with($foto, '/uploads/')) {
             return;
         }
-        $caminho = __DIR__ . '/../../public' . $fotoUrl;
+        $caminho = __DIR__ . '/../../public' . $foto;
         if (is_file($caminho)) {
             unlink($caminho);
         }

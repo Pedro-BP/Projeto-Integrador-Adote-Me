@@ -41,15 +41,15 @@ class Postagem
         $db = Connection::get();
         $id = Uuid::uuid4()->toString();
         $stmt = $db->prepare(
-            "INSERT INTO postagens (id, pet_id, usuario_id, foto_url, relato)
-             VALUES (:id, :pet_id, :usuario_id, :foto_url, :relato)"
+            "INSERT INTO postagens (id, pet_id, usuario_id, foto, relato)
+             VALUES (:id, :pet_id, :usuario_id, :foto, :relato)"
         );
         $stmt->execute([
             'id'         => $id,
             'pet_id'     => $dados['pet_id'],
             'usuario_id' => $usuarioId,
-            'foto_url'   => $dados['foto_url'] ?? null,
-            'relato'     => $dados['relato']   ?? null,
+            'foto'       => $dados['foto']   ?? null,
+            'relato'     => $dados['relato'] ?? null,
         ]);
         return $id;
     }

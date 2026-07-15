@@ -47,7 +47,7 @@ class PetController
         $arquivo = $request->getUploadedFiles()['foto'] ?? null;
         if ($arquivo && $arquivo->getError() === UPLOAD_ERR_OK) {
             try {
-                $dados['foto_url'] = UploadHelper::salvar($arquivo, 'pets');
+                $dados['foto'] = UploadHelper::salvar($arquivo, 'pets');
             } catch (InvalidArgumentException $e) {
                 $response->getBody()->write(json_encode(['erro' => $e->getMessage()]));
                 return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
@@ -84,11 +84,11 @@ class PetController
             return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
         }
 
-        UploadHelper::remover($pet['foto_url']);
-        Pet::update($args['id'], ['foto_url' => $novoPath]);
+        UploadHelper::remover($pet['foto']);
+        Pet::update($args['id'], ['foto' => $novoPath]);
 
         $response->getBody()->write(json_encode([
-            'foto_url' => $novoPath,
+            'foto'     => $novoPath,
             'mensagem' => 'Foto atualizada com sucesso',
         ]));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
@@ -137,7 +137,7 @@ class PetController
             }
             throw $e;
         }
-        UploadHelper::remover($pet['foto_url']);
+        UploadHelper::remover($pet['foto']);
         $response->getBody()->write(json_encode(['mensagem' => 'Pet removido com sucesso']));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }

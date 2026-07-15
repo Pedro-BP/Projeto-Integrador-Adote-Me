@@ -38,7 +38,7 @@ export default function CardPostagem({ postagem }) {
   return (
     <div className="overflow-hidden rounded-[20px] border border-[#1E3D32]/[0.14] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-[#EDEAE0]/[0.14] dark:bg-[#1A2420]">
       <img
-        src={resolverFotoUrl(postagem.foto_url) || FOTO_PLACEHOLDER}
+        src={resolverFotoUrl(postagem.foto) || FOTO_PLACEHOLDER}
         alt={`${postagem.pet_nome} com a nova família`}
         className="h-64 w-full object-cover"
       />
