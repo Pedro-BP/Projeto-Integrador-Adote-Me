@@ -9,19 +9,27 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class PostagemController
 {
+    // Lista todas as postagens.
     public function index(Request $request, Response $response): Response
     {
+        // Pega os filtros enviados pela Url.
         $filtros = $request->getQueryParams();
+
+        // Busca as postagens, podendo filtrar pelo id do pet.
         $postagens = Postagem::all([
             'pet_id' => $filtros['pet_id'] ?? null,
         ]);
+
+        // Retorna os dados em json.
         $response->getBody()->write(json_encode($postagens));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 
+    // Mostra uma postagem pelo id.
     public function show(Request $request, Response $response, array $args): Response
     {
         $postagem = Postagem::findById($args['id']);
+        // Se não encontrar a postagem,retorna um erro.
         if (!$postagem) {
             $response->getBody()->write(json_encode(['erro' => 'Postagem não encontrada']));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
@@ -30,9 +38,14 @@ class PostagemController
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 
+    // Cria uma nova postagem.
     public function store(Request $request, Response $response): Response
     {
+
+        // Pega os dados enviados.
         $dados = $request->getParsedBody() ?? [];
+
+        // Verifica se o id do pet foi informado.
         if (empty($dados['pet_id'])) {
             $response->getBody()->write(json_encode(['erro' => 'pet_id é obrigatório']));
             return $response->withStatus(422)->withHeader('Content-Type', 'application/json');
@@ -42,6 +55,7 @@ class PostagemController
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
         }
 
+        // Verifica se alguma foto foi enviada.
         $arquivo = $request->getUploadedFiles()['foto'] ?? null;
         if ($arquivo && $arquivo->getError() === UPLOAD_ERR_OK) {
             try {
@@ -52,7 +66,10 @@ class PostagemController
             }
         }
 
+        // Pega o usuário que está criando a postagem.
         $usuarioId = $request->getAttribute('usuario_id');
+
+        // Salva a postagem no banco.
         $id = Postagem::create($dados, $usuarioId);
         $response->getBody()->write(json_encode([
             'id'       => $id,
@@ -61,6 +78,7 @@ class PostagemController
         return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
     }
 
+    // Registra uma curtida em uma postagem.
     public function curtir(Request $request, Response $response, array $args): Response
     {
         $postagem = Postagem::findById($args['id']);
